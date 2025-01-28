@@ -1,0 +1,247 @@
+.about{
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    background:linear-gradient(to bottom,white,transparent),linear-gradient(to top,white,transparent);
+    background-repeat: no-repeat;
+    background-position: top,bottom;
+    overflow: hidden;
+}
+
+.about-section-1{
+    width: 100%;
+    height: 400px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    padding-top: 20px;
+    margin-top: 10px;
+}
+
+.about-section-1::after{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    content: "";
+    background-image: url('About_Image_1.jpg');
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.about-section-1 span{
+    font-size: 45px;
+    font-weight: 300;
+    z-index: 5;
+}
+
+.about-section-1 p{
+    margin-top: 15px;
+    z-index: 5;
+    color:black;
+    font-weight: 500;
+    line-height: 30px;
+    max-width: 90%;
+}
+.about-section-1 .link{
+    z-index: 5;
+    border-bottom: 5px solid red;
+}
+.link a{
+    z-index: 5;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.about-section-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.about-section-2 .about-cards{
+    width: 100%;
+    padding: 3px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.about-cards .card{
+    width:49%;
+    height: 350px;
+    color: white;
+    background-color: black;
+    border: 5px solid white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: -5px 0 10px rgba(0,0,0,0.3), 5px 0 10px rgba(0,0,0,0.1),0 5px 10px rgba(0,0,0,0.1),0 -5px 10px rgba(0,0,0,0.1);
+}
+
+.card::after{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-image: url('Equipment1.jpg');
+    background-position: center;
+    background-size: cover;
+    z-index: 1;
+    opacity: 0.3;
+    border-radius: 10px;
+}
+
+.card .card-content{
+    z-index: 5;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-content h2{
+    max-width: 90%;
+}
+.card-content p{
+    margin-top: 20px;
+    max-width: 90%;
+    max-height: fit-content;
+}
+
+.about-section-3{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-section-3 .about-rectangles{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.about-rectangles .rectangle{
+    width:90%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    box-shadow: -5px 0 10px rgba(0,0,0,0.3), 5px 0 10px rgba(0,0,0,0.3);
+    padding: 30px;
+}
+
+.rectangle p{
+    max-width: 90%;
+    margin-top: 10px;
+}
+
+.about-section-4{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    padding: 5px;
+}
+.about-section-4 p{
+    max-width: 90%;
+    line-height: 25px;
+}
+
+.about-section-4 span{
+    font-size: 40px;
+    font-weight: bold;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    margin-bottom: 30px;
+}
+
+
+@media (max-width: 1020px) {
+    .about-section-1 span{
+        font-size: 30px;
+    }
+    .about-section-1 p{
+        font-size: 15px;
+        line-height: 25px;
+    }
+
+    .about-section-1 .link{
+        border-bottom: 3px solid red;
+    }
+    .link a{
+        font-size: 14px;
+    }
+    .about-cards .card{
+        width: 95%;
+    }
+    .card .card-content{
+        width: 100%;
+        font-size: 16px;
+    }
+    .about-rectangles .rectangle{
+        width: 95%;
+        height: fit-content;
+    }
+    .rectangle p{
+        max-width: 95%;
+        font-size: 15px;
+    }
+    .reactangle-content h1{
+        font-size: 25px;
+    }
+    
+}
+
+@media (max-width: 768px){
+    .about-section-1 p{
+        font-size: 13px;
+        line-height: 20px;
+    }
+    .card .card-content{
+        width: 100%;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 500px){
+    .about-cards .card{
+        height: fit-content;
+        padding: 10px;
+    }
+    .about-section-4 span{
+        font-size: 25px;
+        margin-bottom: 20px;
+    }
+    .about-section-4 p{
+        line-height: 20px;
+    }
+}

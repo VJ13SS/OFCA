@@ -1,0 +1,183 @@
+.pricings {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  padding-bottom: 50px;
+}
+
+.pricings .pricings-header {
+  border-bottom: 5px solid red;
+  padding: 5px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.pricings h5 {
+  margin-bottom: 15px;
+}
+
+.pricings-header h2 {
+  font-size: 40px;
+  letter-spacing: 10px;
+}
+
+.pricings .pricings-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.pricings-details .pricing {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 400px;
+  height:auto;
+  padding: 20px;
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  transition: all 0.3s linear;
+  position: relative;
+}
+
+.pricing .pricings-container {
+  border: 0.5px solid black;
+  width: 80px;
+  height: 25px;
+  padding-left: 5px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.pricing h3 {
+  max-width: 90%;
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+
+.pricing span,
+.pricing h1 span,
+.pricing p {
+  font-size: 15px;
+  font-weight: 100;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.pricing p {
+  max-width: 90%;
+  margin-bottom: 30px;
+}
+
+.pricing h1 {
+  margin-bottom: 12px;
+}
+
+.pricing span {
+  margin-bottom: 20px;
+}
+
+.pricing .close {
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 9;
+}
+.pricing-selections {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.pricing-selections div {
+  height: 35px;
+  text-align: center;
+  transition: all 0.3s linear;
+}
+
+.pricing-selections div span {
+  font-weight: 600;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pricings .proceed-selections {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.proceed-selections button {
+  height: 35px;
+  width: 150px;
+  font-weight: bold;
+  font-size: 17px;
+  cursor: pointer;
+  border: 3px solid;
+  border-image: linear-gradient(45deg, #ff6b6b, #5f27cd);
+  border-image-slice: 1;
+}
+
+.pricings .pricings-timer {
+  width: 0%;
+  height: 3px;
+  background-color: rgb(10, 100, 226);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  animation: timer 2s linear 1 forwards;
+}
+
+@media (max-width: 768px) {
+  .pricings {
+    margin-top: 50px;
+  }
+  .pricings-details .pricing {
+    width: 90%;
+  }
+  .pricing span,
+  .pricing h1 span,
+  .pricing p {
+    font-size: 18px;
+  }
+}
+
+@media(max-width:500px){
+  .pricings-header h2 {
+    font-size: 25px;
+    letter-spacing: 3px;
+  }
+  .pricings h5 {
+    font-size: 10px;
+  }
+
+  .pricing p {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .pricing h1 {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+  
+  .pricing span {
+    font-size: 17px;
+    margin-bottom: 14px;
+  }
+}

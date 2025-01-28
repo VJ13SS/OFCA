@@ -1,0 +1,130 @@
+.cart{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 30px;
+    width: 100%;
+    min-height: 90vh;
+    z-index: 21;/*to avoid the overlapping of nav cart */
+    position: relative;
+}
+
+.cart h1{
+    margin-block: 30px;
+}
+
+.cart button{
+    cursor: pointer;
+}
+
+.cart-header{
+    width:70%;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+.cart .cart-header button,.cart-item-quantity button{
+    width: fit-content;
+    height: 40px;
+    background-color: rgb(234, 60, 77);
+    border: none;
+    border-radius: 50px;
+    color:white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: all 0.5s linear;
+    margin-bottom: 30px;
+    padding: 8px;
+}
+
+.cart .cart-header button:hover{
+    background-color: rgb(203, 15, 34);
+}
+
+.cart-item{
+    display: flex;
+    gap: 10px;
+    justify-content:space-around ;
+    align-items: center;
+    width: 80%;
+    border-bottom: 1px solid black;
+    height: 250px;
+    font-size: 25px;
+}
+
+
+.cart-item .cart-item-quantity button{
+    width: 30px;
+    height: 30px;
+    margin-inline: 10px;
+    border-radius: 50%;
+    
+}
+.cart-item .item-icon{
+    height: 90%;
+}
+
+.item-icon img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.cart-item .cart-item-details{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+}
+
+.cart-item-details span{
+    max-width: 90%;
+}
+
+
+@media (max-width:768px){
+    .cart-header{
+        width:100%;
+    }
+    .cart-item{
+        width: 95%;
+        height: 200px;
+        font-size: 20px;
+        margin-top: 10px;
+    }
+    .cart-item .item-icon{
+        height: 70%;
+        width: 30%;
+    }
+    .cart-item .cart-item-details{
+        width: 60%;
+    }
+}
+
+@media (max-width:500px){
+    .cart-header{
+        width:100%;
+        font-size: 22px;
+    }
+    .cart .cart-header button{
+        
+        font-size: 15px;
+    }
+    .cart-item{
+        width: 95%;
+        height: 150px;
+        font-size: 15px; 
+    }
+    .cart-item .cart-item-details{
+        gap: 5px;
+    }
+    .cart-item .cart-item-quantity button{
+        width: 20px;
+        height: 20px;
+    }
+
+    
+}

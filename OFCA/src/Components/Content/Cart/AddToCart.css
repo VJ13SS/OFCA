@@ -1,0 +1,134 @@
+.product-selections{
+    /*margin-top: var(--top-offset);similar to the height of navbar*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-top: 30px;
+    z-index: 10;
+    min-height: 90vh;
+    width: 100%;
+}
+
+.product-selections h2{
+    margin-block: 20px;
+}
+.product-selections .user-choices{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.selectedPlan{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    width: 80%;
+    height: 260px;
+    border-radius: 10px;
+}
+
+.selectedPlan .ofca-image{
+    width: 30%;
+    height: 130px;
+}
+
+.selectedPlan .ofca-image img{
+    width: 70%;
+    height: 90%;
+    object-fit: cover;
+}
+
+.selectedPlan span{
+    font-weight: 500;
+}
+
+.selectedPlan .plan-details{
+    width: 50%;
+}
+
+.selectedPlan .plan-details h2{
+    width: 80%;
+    margin-block: 20px;
+    font-weight: 700;
+}
+.selectedPlan .plan-details .container{
+    width: fit-content;
+    padding-inline: 5px;
+    margin-top: 10px;
+}
+
+.selectedPlan .product-options-container{
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.product-options-container .product-options{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.product-options .product-quantity{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+/*Increment and decrement buttons*/
+.product-quantity button{
+    width: 25px;
+    height: 25px;
+    border: 2px solid black;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.add-to-cart{
+    background-color:black;
+    color: white;
+    width: 170px;
+    height: 40px;
+    border: 1px solid black;
+    padding: 5px;
+    font-weight: bold;
+    transition: all 0.3s linear;
+    margin-block: 50px;
+    border-radius: 10px;
+}
+
+.add-to-cart:hover{
+    background-color: red;
+}
+
+
+@media (max-width:500px){
+    .selectedPlan{
+        flex-direction: column;
+        height: auto;
+    }
+    .selectedPlan .ofca-image{
+        width: 90%;
+        height: 100px;
+    }
+    
+    .selectedPlan .ofca-image img{
+        width: 70%;
+    }
+    .selectedPlan .plan-details{
+        width: 100%;
+        font-size: 15px;
+    }
+}
