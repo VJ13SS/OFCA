@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
-import emailjs from "@emailjs/browser"
+import emailjs from "@emailjs/browser";
 
 export default function PurchaseItems({
   cartItems,
@@ -154,24 +154,18 @@ export default function PurchaseItems({
             </tbody>
             </table>`;
   };
-  
 
-  const sendEmail =() => {
+  const sendEmail = () => {
     setForm({ ...form, products_table: generateProductsTable() });
-    emailjs.send(
-      "service_44nolmr",
-      "template_ud3pu5m",
-      form,
-      "7xzu1_S-S0TbFD6yt"
-    ).then(
+    emailjs.send("service", "template", form, "7xzu1_").then(
       (response) => {
-        alert('Email send',response)
+        alert("Email send", response);
       },
       (error) => {
-        alert('Error',error)
+        alert("Error", error);
       }
-    )
-  }
+    );
+  };
   return (
     <div className="purchase-items">
       <button onClick={sendEmail}>Send</button>
