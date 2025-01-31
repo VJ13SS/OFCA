@@ -2,7 +2,9 @@ import "./purchaseItems.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import StripeCheckout from 'react-stripe-checkout'
+import StripeCheckout from "react-stripe-checkout";
+import emailjs from "@emailjs/browser"
+
 export default function PurchaseItems({
   cartItems,
   discount,
@@ -10,7 +12,6 @@ export default function PurchaseItems({
   setItemsPurchased,
   setCartItems,
 }) {
-  
   const navigate = useNavigate();
   const [displayTimer, setDisplayTimer] = useState(false);
   cartItems.sort((item1, item2) => item1.level - item2.level);
@@ -29,7 +30,18 @@ export default function PurchaseItems({
     }, 2000);
   };
 
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({
+    UserName: "",
+    EmailAddress: "",
+    CompanyName: "Not Available",
+    Country_or_Region: "",
+    State_or_County: "",
+    Town_or_City: "",
+    HouseNumber_and_StreetName: "",
+    PostalCode_or_PinCode_or_ZipCode: "",
+    Phone: "",
+    additional_information: "Not Available",
+  });
 
   const updatePurchaseHistory = (items, choices) => {
     let updatedItems = [...items];
@@ -64,34 +76,105 @@ export default function PurchaseItems({
       alert(error);
     }
   };
-  
-  const makePayment = async (token) => { 
+
+  const makePayment = async (token) => {
     const body = {
       token,
-      cartItems
-    }
+      cartItems,
+    };
     const headers = {
-      'Content-Type':'application/json'
-    }
-    const response = await fetch('http://localhost:3000/payment',{
-      method:'POST',
-      headers:headers,
-      body:JSON.stringify(body)
-    })
+      "Content-Type": "application/json",
+    };
+    const response = await fetch("http://localhost:3000/payment", {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    });
 
-    const data = await response.json()
+    const data = await response.json();
 
-    if(data.success){
-      alert('Payment successfull')
-    }else{
-      alert('Payment Failed')
+    if (data.success) {
+      alert("Payment successfull");
+    } else {
+      alert("Payment Failed");
     }
+  };
+
+  const generateProductsTable = () => {
+    return `<table style = "
+    width: 70%;
+    border-collapse: collapse">
+    <thead>
+              <tr>
+              <th style ="text-align: center;
+    border: 1px solid black;
+    padding: 10px;">Level</th>
+    <th style ="text-align: center;
+    border: 1px solid black;
+    padding: 10px;">Plan</th>
+    <th style ="text-align: center;
+    border: 1px solid black;
+    padding: 10px;">Quantity</th>
+    <th style ="text-align: center;
+    border: 1px solid black;
+    padding: 10px;">Price</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+            <tbody>
+              ${cartItems
+                .map((item, index) => {
+                  return `
+                  <tr >
+                    <td style = "text-align: center;
+    border: 1px solid black;
+    padding: 10px;>
+                      <span>${item.level}</span>
+                    </td>
+                    <td style = "text-align: center;
+    border: 1px solid black;
+    padding: 10px;>
+                      <span>OFCA Certification Programme ${item.plan}</span>
+                    </td>
+                    <td style = "text-align: center;
+    border: 1px solid black;
+    padding: 10px;>
+                      <span>${item.quantity}</span>
+                    </td>
+                    <td style = "text-align: center;
+    border: 1px solid black;
+    padding: 10px;>
+                      <span>${item.amount * item.quantity}</span>
+                    </td>
+                  </tr>
+                `;
+                })
+                .join("")}
+            </tbody>
+            </table>`;
+  };
+  
+
+  const sendEmail =() => {
+    setForm({ ...form, products_table: generateProductsTable() });
+    emailjs.send(
+      "service_44nolmr",
+      "template_ud3pu5m",
+      form,
+      "7xzu1_S-S0TbFD6yt"
+    ).then(
+      (response) => {
+        alert('Email send',response)
+      },
+      (error) => {
+        alert('Error',error)
+      }
+    )
   }
-
-
   return (
     <div className="purchase-items">
-      <button onClick={purchase}>Send</button>
+      <button onClick={sendEmail}>Send</button>
       <button className="back-button" onClick={returnCart}>
         Back
       </button>
@@ -174,7 +257,7 @@ export default function PurchaseItems({
             <input
               type="text"
               placeholder="Apartment, Suite, Unit ,etc .(optional): "
-              name="Apartment/Suite/Unit"
+              name="Apartment_or_Suite/Unit"
               onChange={(e) =>
                 setForm({ ...form, [e.target.name]: e.target.value })
               }
@@ -187,7 +270,7 @@ export default function PurchaseItems({
           <input
             type="text"
             placeholder="PostCode /PinCode/ZipCode: "
-            name="PostCode/PinCode/ZipCode"
+            name="PostCode_or_PinCode_or_ZipCode"
             onChange={(e) =>
               setForm({ ...form, [e.target.name]: e.target.value })
             }
@@ -224,7 +307,7 @@ export default function PurchaseItems({
           <h3>Order Notes</h3>
           <textarea
             placeholder="Notes about your order, eg: special notes for delivery: "
-            name="additional-information"
+            name="additional_information"
             onChange={(e) =>
               setForm({ ...form, [e.target.name]: e.target.value })
             }
@@ -265,12 +348,16 @@ export default function PurchaseItems({
             )}
           </h2>
         </div>
-
-        
       </form>
-      {cartItems.length > 0 && <StripeCheckout stripeKey="Key=" token={makePayment} name="Purchase Items">
+      {cartItems.length > 0 && (
+        <StripeCheckout
+          stripeKey="Key="
+          token={makePayment}
+          name="Purchase Items"
+        >
           <button className="purchase">Pay</button>
-          </StripeCheckout>}
+        </StripeCheckout>
+      )}
     </div>
   );
 }
