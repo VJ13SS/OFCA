@@ -32,7 +32,7 @@ export default function App() {
     (sum, item) => sum + item.amount * item.quantity,
     0
   );
-
+console.log(discount,totalPrice)
   return (
     <div className="app">
       <Navbar cartItems={cartItems} />

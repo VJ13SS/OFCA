@@ -39,36 +39,11 @@
 /*LINKS AND NEWS LETTER SECTION*/
 .footer .footer-section-3{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
 }
 
-.footer-section-3 .news-letter{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
 
-.news-letter .form{
-    display: flex;
-}
-.news-letter .form input{
-    padding: 10px;
-    width: 300px;
-    height: 30px;
-    background-color: rgba(45, 43, 43, 0.5);
-    border: 0.75px solid gray;
-    color:white
-}
-
-.form button{
-    height: 30px;
-    border: 1px solid gray;
-    padding: 5px;
-    background-color: rgb(246, 52, 52);
-    color:white;
-    font-weight: bold;
-    font-size: 17px;
-}
 
 .footer-section-3 .links{
     display: flex;

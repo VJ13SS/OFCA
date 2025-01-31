@@ -15,20 +15,15 @@ export default function Footer() {
         <span className="email">plyonsfit@gmail.com</span>
       </div>
       <div className="footer-section-3">
-        <div className="news-letter">
-          <span>NEWS LETTER</span>
-          <div className="form">
-            <input type="email" placeholder="Enter Your Email..." />
-            <button><FaEnvelope /></button>
-          </div>
-        </div>
+    
         <div className="links">
-          <span>FOLLOW US </span>
+          
           <span className="icon" style={{color:'blue',marginLeft:'10px'}}><FaFacebook /></span>
           <span className="icon" style={{color:'red'}}><FaInstagram /></span>
           <span className="icon" style={{color:'red'}}><FaYoutube /></span>
         </div>
       </div>
+      <span style={{color:'gray',fontSize:'10px'}}>Created by VJ 13 SS</span>
     </div>
   );
 }

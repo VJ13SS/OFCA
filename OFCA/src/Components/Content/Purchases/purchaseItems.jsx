@@ -1,5 +1,5 @@
 import "./purchaseItems.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import StripeCheckout from "react-stripe-checkout";
@@ -31,8 +31,9 @@ export default function PurchaseItems({
   };
 
   const [form, setForm] = useState({
-    totalPrice: totalPrice,
-    discount: discount,
+    totalPrice: 0,
+    discount: 0,
+    finalPrice:0,
     UserName: "",
     EmailAddress: "",
     CompanyName: "Not Available",
@@ -43,8 +44,49 @@ export default function PurchaseItems({
     PostalCode_or_PinCode_or_ZipCode: "",
     Phone: "",
     additional_information: "Not Available",
+    products_table:''
   });
-
+  const generateProductsTable = () => {
+    return `<table style = "
+    width: 90%;
+    border-collapse: collapse;">
+    <thead>
+      <tr>
+          <th style="text-align:center; border:1px solid black;padding:10px;">Level</th>
+          <th style="text-align:center; border:1px solid black;padding:10px;">Plan</th>
+          <th style="text-align:center; border:1px solid black;padding:10px;">Quantity</th>
+          <th style="text-align:center; border:1px solid black;padding:10px;">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${cartItems
+        .map((item) => {
+          return `
+          <tr>
+              <td style = "text-align:center;border:1px solid black;padding: 10px;">
+                <span>${item.level}</span>
+              </td>
+              <td style = "text-align:center;border:1px solid black;padding: 10px;">
+                <span>OFCA Certification Programme ${item.plan}</span>
+              </td>
+              <td style = "text-align:center;border:1px solid black;padding: 10px;">
+                <span>${item.quantity}</span>
+              </td>
+              <td style = "text-align:center;border:1px solid black;padding: 10px;">
+                <span>${item.amount * item.quantity}</span>
+              </td>
+          </tr>`;
+        })
+        .join("")}
+      </tbody>
+      </table>`;
+  };
+  useEffect(() => {
+    setForm((prev) => ({
+      ...prev,totalPrice:totalPrice,discount:discount,finalPrice:totalPrice - discount,products_table:generateProductsTable()
+    }))
+  },[totalPrice])
+  
   const updatePurchaseHistory = (items, choices) => {
     let updatedItems = [...items];
 
@@ -102,44 +144,9 @@ export default function PurchaseItems({
     }
   };
 
-  console.log(cartItems)
-  const generateProductsTable = () => {
-    return `<table style = "
-    width: 90%;
-    border-collapse: collapse;">
-    <thead>
-      <tr>
-          <th style="text-align:center; border:1px solid black;padding:10px;">Level</th>
-          <th style="text-align:center; border:1px solid black;padding:10px;">Plan</th>
-          <th style="text-align:center; border:1px solid black;padding:10px;">Quantity</th>
-          <th style="text-align:center; border:1px solid black;padding:10px;">Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${cartItems
-        .map((item) => {
-          return `
-          <tr>
-              <td style = "text-align:center;border:1px solid black;padding: 10px;">
-                <span>${item.level}</span>
-              </td>
-              <td style = "text-align:center;border:1px solid black;padding: 10px;">
-                <span>OFCA Certification Programme ${item.plan}</span>
-              </td>
-              <td style = "text-align:center;border:1px solid black;padding: 10px;">
-                <span>${item.quantity}</span>
-              </td>
-              <td style = "text-align:center;border:1px solid black;padding: 10px;">
-                <span>${item.amount * item.quantity}</span>
-              </td>
-          </tr>`;
-        })
-        .join("")}
-      </tbody>
-      </table>`;
-  };
-
   const sendEmail = () => {
+    const table = generateProductsTable();
+    console.log(table)
     setForm({ ...form, products_table: generateProductsTable()});
     emailjs
       .send("service_44nolmr", "template_ud3pu5m", form, "7xzu1_S-S0TbFD6yt")
