@@ -7,7 +7,9 @@ import { IoMdMan } from "react-icons/io";
 export default function Sidelinks() {
     const [displaySideBar,setDisplaySideBar] = useState(true)
     const [displaySideLinks,setDisplaySideLinks] = useState(false)
-    const location = useLocation();
+
+    const location = useLocation();//to display the side bar only on the home screen
+
   return (
     <div
       className="side-links"

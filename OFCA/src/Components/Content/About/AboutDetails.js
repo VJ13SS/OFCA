@@ -1,3 +1,4 @@
+//Cards Data
 export const details_one = [
     {
         heading:'How Does The Online Fitness Coach Academy Work?',
@@ -17,6 +18,7 @@ export const details_one = [
     },
 ]
 
+//Rectangles data
 export const details_two = [
     {
         heading:'Scaling Your Impact',

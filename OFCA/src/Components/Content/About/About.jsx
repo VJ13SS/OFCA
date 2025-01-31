@@ -2,6 +2,7 @@ import "./About.css";
 import { details_one, details_two } from "./AboutDetails";
 
 export default function About() {
+
   const cards = details_one.map((item, index) => {
     return (
       <div className="card" key={index}>
@@ -12,6 +13,7 @@ export default function About() {
       </div>
     );
   });
+  
 //https://lyon.training/online-fitness-coach-academy/
   const rectangles = details_two.map((item, index) => {
     return (

@@ -5,16 +5,10 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
 export default function Pricings() {
-  const navigate = useNavigate();
 
   const [pricings, setPricings] = useState(pricing_details);
 
-  const purchasedDate = () => {
-    const today = new Date();
-    const formattedDate = today.toISOString().split("T")[0];
-    return formattedDate;
-  };
-
+  //Function which runs when a program is selected
   const selectProgram = (id, selectedPlan) => {
     setPricings((prev) =>
       prev.map((item) =>
@@ -24,7 +18,6 @@ export default function Pricings() {
               plan: selectedPlan,
               amount: selectedPlan == "3 Monthly Payments" ? 250 : 700,
               selected: true,
-              purchasedOn: purchasedDate(),
             }
           : item
       )
@@ -40,19 +33,27 @@ export default function Pricings() {
     );
   };
 
-  const anySelection = pricings.some((item) => item.selected);
-  const selections = pricings.filter((item) => item.selected);
+  const anySelection = pricings.some((item) => item.selected);//to check if the user had selected any program
+  const selections = pricings.filter((item) => item.selected);// to filter the selected items
+
   const [displayTimer, setDisplayTimer] = useState(false);
+  const navigate = useNavigate();
+
+  //Proceed with the selections to add to the cart
+  //selected items are added to the cart rather than keeping in the state variables is to prevent the resetting of state when the page refreshes
+  //Other methods can be used.How ever finite number of items(max 5) will be added to the local storage and will be cleared as soon as they are added to cart
 
   const proceedSelections = () => {
     setDisplayTimer(true);
     localStorage.setItem("userSelections", JSON.stringify(selections));
+
     setTimeout(() => {
       navigate("/add-to-cart");
       setDisplayTimer(false);
     }, 2000);
   };
 
+  //Each Level is represented by a specific color
   const pricingData = pricings.map((item, index) => {
     return (
       <div

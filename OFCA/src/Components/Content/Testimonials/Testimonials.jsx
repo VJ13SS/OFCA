@@ -2,22 +2,6 @@ import "./Testimonials.css";
 
 export default function Testimonials() {
 
-  //For Future
-  /*
-  const testimonials = testimonials_details.map((item, index) => {
-    return (
-      <div className="testimonial">
-        <div className="image">
-          <img src="./Images/OFCA_Model2.jpg" alt="" srcset="" />
-        </div>
-        <div className="testimonial-details">
-          <p>"{item.testimonial}"</p>
-          <span>{item.name}</span>
-        </div>
-      </div>
-    );
-  });*/
-
   return (
     <div className="testimonials" id="testimonials-page">
       <div className="testimonials-header">

@@ -8,14 +8,10 @@ export default function Cart({
   setCartItems,
   discount,
   totalPrice,
-  
-  
 }) {
-
-  cartItems.sort((item1, item2) => item1.level - item2.level);
   
+  //Update the quantities
   const updateQuantity = (option, level, plan) => {
-    console.log(option, level);
     setCartItems((prev) =>
       prev.map((item) => {
         if (item.level === level && item.plan === plan) {
@@ -31,6 +27,7 @@ export default function Cart({
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
 
+  //Delete the Items
   const deleteItem = (level, plan) => {
     confirm("Do you want to delete the item from the cart?");
     const newCartItems = cartItems.filter(
@@ -40,6 +37,7 @@ export default function Cart({
     localStorage.setItem("cartItems", JSON.stringify(newCartItems));
   };
 
+  //Cart Items
   const items = cartItems.map((item, index) => {
     return (
       <div className="cart-item" key={index}>
@@ -53,12 +51,8 @@ export default function Cart({
               ? "OFCA Certification Program 3 Months"
               : "OFCA Certification Program Full Certification"}
           </span>
-
           <span>
-            Price :{" "}
-            <span style={{ color: "green" }}>
-              {item.amount}
-            </span>
+            Price : <span style={{ color: "green" }}>{item.amount}</span>
           </span>
           <span>
             Total Price :{" "}
@@ -79,7 +73,6 @@ export default function Cart({
               +
             </button>
           </div>
-          
         </div>
         <FaTrash
           onClick={() => deleteItem(item.level, item.plan)}
@@ -88,15 +81,20 @@ export default function Cart({
       </div>
     );
   });
-  const [displayTimer, setDisplayTimer] = useState(false);
 
+  const [displayTimer, setDisplayTimer] = useState(false);
   const navigate = useNavigate();
+
+  //to navigate to the /purchase-items link
   const purchaseItems = () => {
     setDisplayTimer(true);
     setTimeout(() => {
       navigate("/purchase-items");
     }, 2000);
   };
+
+  //to navigate to the home page
+  
   const returnHome = () => {
     setDisplayTimer(true);
     setTimeout(() => {
@@ -112,14 +110,16 @@ export default function Cart({
       </button>
       <h5>**Refresh to load your Cart Items</h5>
       <h1>Your Cart</h1>
-      
+
       {items.length != 0 ? (
         <div className="cart-header">
-          <span>Total Price: 
-            ${totalPrice - discount}{" "}
-            {discount > 0 && <span style={{ textDecoration: "line-through" }}>
-              ${totalPrice}
-            </span>}
+          <span>
+            Total Price: ${totalPrice - discount}{" "}
+            {discount > 0 && (
+              <span style={{ textDecoration: "line-through" }}>
+                ${totalPrice}
+              </span>
+            )}
           </span>
           <button onClick={purchaseItems}>
             Proceed to buy {cartItems.length} Items

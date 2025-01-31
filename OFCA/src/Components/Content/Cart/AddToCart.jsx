@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 import "./AddToCart.css";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-export default function AddToCart({setCartItems}) {
-  const [userPrograms, setUserPrograms] = useState([]);
+export default function AddToCart({ setCartItems }) {
+  const [userPrograms, setUserPrograms] = useState([]); // to hold the plans selected by the user
 
   useEffect(() => {
     setUserPrograms(JSON.parse(localStorage.getItem("userSelections")) || []);
+    userPrograms.sort((item1, item2) => item1.level - item2.level);
   }, []);
 
-  userPrograms.sort((item1, item2) => item1.level - item2.level);
-
+  //To update the quantites of the items purchased
   const updateQuantity = (option, level) => {
     console.log(option, level);
     setUserPrograms((prev) =>
@@ -29,6 +27,7 @@ export default function AddToCart({setCartItems}) {
     );
   };
 
+  //Each choice is provied a respective color for identification
   const userChoices = userPrograms.map((item, index) => {
     return (
       <div
@@ -100,6 +99,7 @@ export default function AddToCart({setCartItems}) {
     );
   });
 
+  //To add the user choices to their cart
   const updateCart = (items, choices) => {
     let updatedItems = [...items];
 
@@ -108,6 +108,7 @@ export default function AddToCart({setCartItems}) {
         (item) => item.level == element.level && item.plan == element.plan
       );
 
+      // Quantity wont drop below 1
       if (index != -1) {
         updatedItems[index].quantity += element.quantity;
       } else {
@@ -119,14 +120,17 @@ export default function AddToCart({setCartItems}) {
   };
 
   const navigate = useNavigate();
+
   const pushToCart = () => {
+    //Get the cart items of users from the local storage
     let inCart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-    //inCart.unshift(...userPrograms)
+    //Add the users choices to their cart and updating the local storage
     const updatedInCart = updateCart(inCart, userPrograms);
-    setUserPrograms(updatedInCart)
+    setUserPrograms(updatedInCart);
     localStorage.setItem("cartItems", JSON.stringify(updatedInCart));
-    setCartItems(updatedInCart)
+    setCartItems(updatedInCart);
+
     alert("Added to cart");
     navigate("/");
   };
@@ -138,7 +142,6 @@ export default function AddToCart({setCartItems}) {
       <button className="add-to-cart" onClick={pushToCart}>
         SUBSCRIBE NOW
       </button>
-      <ToastContainer />
     </div>
   );
 }

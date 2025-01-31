@@ -5,15 +5,13 @@ import { MdDelete } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function Navbar({ cartItems }) {
+
   const [displayNavLinks, setDisplayNavLinks] = useState(false);
   const [displayCart, setDisplayCart] = useState(false);
+
   const navigate = useNavigate();
-  /*
-  const [cartItems, setCartItems] = useState([]);
-  useEffect(() => {
-    setCartItems(JSON.parse(localStorage.getItem("cartItems")) || []);
-  }, []);*/
-  cartItems.sort((item1, item2) => item1.level - item2.level);
+
+ /// cartItems.sort((item1, item2) => item1.level - item2.level);
   const navCartItems = cartItems.map((item, index) => {
     return (
       <div className="item" key={index}>
@@ -38,6 +36,7 @@ export default function Navbar({ cartItems }) {
       </div>
     );
   });
+
   const location = useLocation();
   
   return (
@@ -49,8 +48,8 @@ export default function Navbar({ cartItems }) {
       </div>
       <div className="nav-center">
         <h2>Fitness Is Life</h2>
-       
       </div>
+
       <div className="nav-right">
         <FaRegClock
           onClick={() => setTimeout(() => navigate("/purchase-history"), 500)}
@@ -64,6 +63,7 @@ export default function Navbar({ cartItems }) {
           onClick={() => setDisplayNavLinks((prev) => !prev)}
         />
       </div>
+      {/*The Navigation Links similar to the ones in the side bar*/}
       <div
         className="nav-links"
         style={{
@@ -102,6 +102,7 @@ export default function Navbar({ cartItems }) {
         </ul>
       </div>
 
+      {/*Cart section shown on the nav bar */}
       <div
         className="nav-cart"
         style={{

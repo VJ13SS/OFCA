@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./PurchaseHistory.css";
 
 export default function PurchaseHistory({ itemsPurchased, setItemsPurchased }) {
+
   const historyItems = itemsPurchased.map((item, index) => {
     return (
       <div className="purchased-item" key={index}>
@@ -33,14 +34,17 @@ export default function PurchaseHistory({ itemsPurchased, setItemsPurchased }) {
 
   const clearPurchaseHistory = () => {
     confirm("Do You Wish to Clear the Purchase History?");
+    
     localStorage.setItem("purchaseHistory", JSON.stringify([]));
     setItemsPurchased([]);
   };
+
   return (
     <div className="purchase-history">
       {displayTimer && <div className="timer"></div>}
       <h2>Your Purchase History</h2>
-      <h6>**Refresh to load your purchases</h6>
+      <h6>*Refresh to load your purchases</h6>
+      {itemsPurchased.length > 50 && <h6>**Displaying the latest 50 purchases</h6>}
       {itemsPurchased.length > 0 && (
         <button onClick={clearPurchaseHistory}>Clear All</button>
       )}

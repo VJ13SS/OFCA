@@ -10,11 +10,11 @@ export default function PurchaseItems({
   discount,
   totalPrice,
   setItemsPurchased,
+  itemsPurchased,
   setCartItems,
 }) {
   const navigate = useNavigate();
   const [displayTimer, setDisplayTimer] = useState(false);
-  cartItems.sort((item1, item2) => item1.level - item2.level);
 
   const returnCart = () => {
     setDisplayTimer(true);
@@ -30,10 +30,11 @@ export default function PurchaseItems({
     }, 2000);
   };
 
+  //Fields are similar to the ones defined in Email js Template
   const [form, setForm] = useState({
     totalPrice: 0,
     discount: 0,
-    finalPrice:0,
+    finalPrice: 0,
     UserName: "",
     EmailAddress: "",
     CompanyName: "Not Available",
@@ -41,11 +42,13 @@ export default function PurchaseItems({
     State_or_County: "",
     Town_or_City: "",
     HouseNumber_and_StreetName: "",
-    PostalCode_or_PinCode_or_ZipCode: "",
+    PostCode_or_PinCode_or_ZipCode: "",
     Phone: "",
     additional_information: "Not Available",
-    products_table:''
+    products_table: "",
   });
+
+  //Products table to be displayed in the email account
   const generateProductsTable = () => {
     return `<table style = "
     width: 90%;
@@ -81,12 +84,19 @@ export default function PurchaseItems({
       </tbody>
       </table>`;
   };
+
+  //To update the form fields
   useEffect(() => {
     setForm((prev) => ({
-      ...prev,totalPrice:totalPrice,discount:discount,finalPrice:totalPrice - discount,products_table:generateProductsTable()
-    }))
-  },[totalPrice])
-  
+      ...prev,
+      totalPrice: totalPrice,
+      discount: discount,
+      finalPrice: totalPrice - discount,
+      products_table: generateProductsTable(),
+    }));
+  }, [totalPrice, discount]);
+
+  //Updating the purchase history
   const updatePurchaseHistory = (items, choices) => {
     let updatedItems = [...items];
 
@@ -96,6 +106,7 @@ export default function PurchaseItems({
 
     return updatedItems;
   };
+
   const purchase = async (e) => {
     e.preventDefault();
     const data = { cartItems, discount, totalPrice, form };
@@ -105,14 +116,19 @@ export default function PurchaseItems({
       let purchased = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
 
       const updatedItemsPurchased = updatePurchaseHistory(purchased, cartItems);
-
-      localStorage.setItem(
-        "purchaseHistory",
-        JSON.stringify(updatedItemsPurchased)
-      );
       setItemsPurchased(updatedItemsPurchased);
+
+      if (updatedItemsPurchased.length > 50) {
+        setItemsPurchased(updatedItemsPurchased.slice(0, 49));
+      }
+
+      //Updating the local storage
+      localStorage.setItem("purchaseHistory", JSON.stringify(itemsPurchased));
+
+      //update the cart
       setCartItems([]);
       localStorage.setItem("cartItems", JSON.stringify([]));
+
       alert("Purchased");
       returnHome();
     } catch (error) {
@@ -121,6 +137,7 @@ export default function PurchaseItems({
     }
   };
 
+  //Connecting the stripe API
   const makePayment = async (token) => {
     const body = {
       token,
@@ -144,21 +161,52 @@ export default function PurchaseItems({
     }
   };
 
-  const sendEmail = () => {
-    const table = generateProductsTable();
-    console.log(table)
-    setForm({ ...form, products_table: generateProductsTable()});
-    emailjs
-      .send("service_44nolmr", "template_ud3pu5m", form, "7xzu1_S-S0TbFD6yt")
-      .then(
-        (response) => {
-          alert("Email send", response);
-        },
-        (error) => {
-          alert("Error", error);
-        }
-      );
+  //to get the purchased date of the program
+  const purchasedDate = () => {
+    const today = new Date();
+    const formattedDate = today.toISOString().split("T")[0];
+    setCartItems((prev) =>
+      prev.map((item) => {
+        return { ...item, purchasedOn: formattedDate };
+      })
+    );
   };
+
+  //Function to link the email js email service
+  const sendEmail = () => {
+    purchasedDate()
+    setForm({ ...form, products_table: generateProductsTable() });
+
+    emailjs.send("service_", "template_", form, "7xzu1_").then(
+      (response) => {
+        let purchased =
+          JSON.parse(localStorage.getItem("purchaseHistory")) || [];
+        const updatedItemsPurchased = updatePurchaseHistory(
+          purchased,
+          cartItems
+        );
+
+        setItemsPurchased(updatedItemsPurchased);
+
+        //Purchase history only holds the latest 50 purchases
+        if (updatedItemsPurchased.length > 50) {
+          setItemsPurchased(updatedItemsPurchased.slice(0, 49));
+        }
+
+        localStorage.setItem("purchaseHistory", JSON.stringify(itemsPurchased));
+
+        //update the cart
+        setCartItems([]);
+        localStorage.setItem("cartItems", JSON.stringify([]));
+
+        alert("Email send", response);
+      },
+      (error) => {
+        alert("Error", error);
+      }
+    );
+  };
+
   return (
     <div className="purchase-items">
       <button onClick={sendEmail}>Send</button>
@@ -235,7 +283,7 @@ export default function PurchaseItems({
             <input
               type="text"
               placeholder="House Number and Street Name: "
-              name="HouseNumber_and_Street_Name"
+              name="HouseNumber_and_StreetName"
               onChange={(e) =>
                 setForm({ ...form, [e.target.name]: e.target.value })
               }
@@ -301,6 +349,7 @@ export default function PurchaseItems({
           />
         </div>
 
+        {/*Product Details Table */}
         <div className="order-details">
           <h2>Your Orders</h2>
           <table>
@@ -336,6 +385,7 @@ export default function PurchaseItems({
           </h2>
         </div>
       </form>
+
       {cartItems.length > 0 && (
         <StripeCheckout
           stripeKey="Key="

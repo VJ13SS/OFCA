@@ -13,29 +13,44 @@ export default function App() {
   //localStorage.clear()
   const [cartItems, setCartItems] = useState([]);
   const [itemsPurchased, setItemsPurchased] = useState([]);
+
+  //To get the cartitems and the purchase history
   useEffect(() => {
+
     setCartItems(JSON.parse(localStorage.getItem("cartItems")) || []);
-    cartItems.sort((item1,item2) => (item1 - item2))
+    cartItems.sort((item1, item2) => item1.level - item2.level);
+
+
     setItemsPurchased(
       JSON.parse(localStorage.getItem("purchaseHistory")) || []
     );
+    if(itemsPurchased.length> 50){
+      //Displays only the first 50 purchased items 
+      setItemsPurchased(itemsPurchased.slice(0,49));
+    }
+
   }, []);
 
-  const selectedLevels = new Set();
+  //to identify the unique level of plans to calculate the discount
+  const selectedLevels = new Set();//to store the unique lebels
   cartItems.forEach((item) => {
     selectedLevels.add(item.level);
   });
 
+  //calculating discount
   const discount =
     selectedLevels.size <= 1 ? 0 : 400 / 2 ** (5 - selectedLevels.size); // 2 levels $50 3 levels $100 4 levels $200 5 levels $400 discount
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.amount * item.quantity,
     0
   );
-console.log(discount,totalPrice)
+
   return (
+
     <div className="app">
+
       <Navbar cartItems={cartItems} />
+
       <Routes>
         <Route path="/" element={<Content />} />
         <Route path="/add-to-cart" element={<AddToCart setCartItems={setCartItems} />} />
@@ -70,6 +85,7 @@ console.log(discount,totalPrice)
       </Routes>
 
       <Footer />
+
     </div>
   );
 }

@@ -1,3 +1,5 @@
+//Programmes Offered
+
 export const pricing_details = [
     {
         id:1,
