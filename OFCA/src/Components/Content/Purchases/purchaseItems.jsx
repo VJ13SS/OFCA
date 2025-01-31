@@ -31,6 +31,8 @@ export default function PurchaseItems({
   };
 
   const [form, setForm] = useState({
+    totalPrice:totalPrice,
+    discount:discount,
     UserName: "",
     EmailAddress: "",
     CompanyName: "Not Available",
@@ -101,60 +103,40 @@ export default function PurchaseItems({
   };
 
   const generateProductsTable = () => {
-    return `<table style = "
+    return `<table style="
     width: 70%;
-    border-collapse: collapse">
+    border-collapse: collapse;">
     <thead>
-              <tr>
-              <th style ="text-align: center;
-    border: 1px solid black;
-    padding: 10px;">Level</th>
-    <th style ="text-align: center;
-    border: 1px solid black;
-    padding: 10px;">Plan</th>
-    <th style ="text-align: center;
-    border: 1px solid black;
-    padding: 10px;">Quantity</th>
-    <th style ="text-align: center;
-    border: 1px solid black;
-    padding: 10px;">Price</th>
-                
-              </tr>
-            </thead>
-            <tbody>
-            <tbody>
-              ${cartItems
-                .map((item, index) => {
-                  return `
-                  <tr >
-                    <td style = "text-align: center;
-    border: 1px solid black;
-    padding: 10px;>
-                      <span>${item.level}</span>
-                    </td>
-                    <td style = "text-align: center;
-    border: 1px solid black;
-    padding: 10px;>
-                      <span>OFCA Certification Programme ${item.plan}</span>
-                    </td>
-                    <td style = "text-align: center;
-    border: 1px solid black;
-    padding: 10px;>
-                      <span>${item.quantity}</span>
-                    </td>
-                    <td style = "text-align: center;
-    border: 1px solid black;
-    padding: 10px;>
-                      <span>${item.amount * item.quantity}</span>
-                    </td>
-                  </tr>
-                `;
-                })
-                .join("")}
-            </tbody>
-            </table>`;
-  };
-  
+        <tr>
+            <th style="text-align: center; border: 1px solid black; padding: 10px;">Level</th>
+            <th style="text-align: center; border: 1px solid black; padding: 10px;">Plan</th>
+            <th style="text-align: center; border: 1px solid black; padding: 10px;">Quantity</th>
+            <th style="text-align: center; border: 1px solid black; padding: 10px;">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        ${cartItems
+          .map((item) => {
+            return `
+            <tr>
+                <td style="text-align: center; border: 1px solid black; padding: 10px;">
+                    <span>${item.level}</span>
+                </td>
+                <td style="text-align: center; border: 1px solid black; padding: 10px;">
+                    <span>OFCA Certification Programme ${item.plan}</span>
+                </td>
+                <td style="text-align: center; border: 1px solid black; padding: 10px;">
+                    <span>${item.quantity}</span>
+                </td>
+                <td style="text-align: center; border: 1px solid black; padding: 10px;">
+                    <span>${item.amount * item.quantity}</span>
+                </td>
+            </tr>`;
+          })
+          .join("")}
+    </tbody>
+    </table>`;
+};
 
   const sendEmail =() => {
     setForm({ ...form, products_table: generateProductsTable() });
