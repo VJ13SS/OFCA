@@ -8,6 +8,12 @@ export default function Pricings() {
 
   const [pricings, setPricings] = useState(pricing_details);
 
+  const anySelection = pricings.some((item) => item.selected);//to check if the user had selected any program
+  const selections = pricings.filter((item) => item.selected);// to filter the selected items
+
+  const [displayTimer, setDisplayTimer] = useState(false);
+  const navigate = useNavigate();
+
   //Function which runs when a program is selected
   const selectProgram = (id, selectedPlan) => {
     setPricings((prev) =>
@@ -33,11 +39,17 @@ export default function Pricings() {
     );
   };
 
-  const anySelection = pricings.some((item) => item.selected);//to check if the user had selected any program
-  const selections = pricings.filter((item) => item.selected);// to filter the selected items
+  //to check for successive selections
+  const checkSelections = (lowestLevel,highestLevel) => {
 
-  const [displayTimer, setDisplayTimer] = useState(false);
-  const navigate = useNavigate();
+    for(let i = lowestLevel;i <= highestLevel ;i++){
+      if(!selections.some((item) => item.level == i)){
+        alert(`You Can only purchase sequential levels (eg: (1,2), (1,2,3), (3,4,5) you have missed Level ${i}`)
+        return false
+      }
+    }
+    return true
+  }
 
   //Proceed with the selections to add to the cart
   //selected items are added to the cart rather than keeping in the state variables is to prevent the resetting of state when the page refreshes
@@ -45,6 +57,15 @@ export default function Pricings() {
 
   const proceedSelections = () => {
     setDisplayTimer(true);
+
+    selections.sort((item1, item2) => item1.level - item2.level);
+    
+    const lowestLevel = selections[0].level;//lowest selected level
+    const highestLevel = selections.at(-1).level;//highest selected level
+    if(!checkSelections(lowestLevel,highestLevel)){
+      return
+    }
+
     localStorage.setItem("userSelections", JSON.stringify(selections));
 
     setTimeout(() => {
@@ -182,6 +203,7 @@ export default function Pricings() {
       </div>
     );
   });
+
   return (
     <div className="pricings" id="pricing-section">
       <div className="pricings-header">

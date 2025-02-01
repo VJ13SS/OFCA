@@ -44,7 +44,6 @@ export default function PurchaseHistory({ itemsPurchased, setItemsPurchased }) {
       {displayTimer && <div className="timer"></div>}
       <h2>Your Purchase History</h2>
       <h6>*Refresh to load your purchases</h6>
-      {itemsPurchased.length > 50 && <h6>**Displaying the latest 50 purchases</h6>}
       {itemsPurchased.length > 0 && (
         <button onClick={clearPurchaseHistory}>Clear All</button>
       )}

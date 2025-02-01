@@ -5,7 +5,7 @@ import Testimonials from "./Testimonials/Testimonials";
 import Pricings from "./Pricings/Pricings";
 import Sidelinks from "../NavLinks/SideLinks";
 
-export default function Content(){
+export default function Content({itemsPurchased}){
     return(
         <div className="content">
             <Hero />

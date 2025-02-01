@@ -187,12 +187,7 @@ export default function PurchaseItems({
         );
 
         setItemsPurchased(updatedItemsPurchased);
-
-        //Purchase history only holds the latest 50 purchases
-        if (updatedItemsPurchased.length > 50) {
-          setItemsPurchased(updatedItemsPurchased.slice(0, 49));
-        }
-
+        
         localStorage.setItem("purchaseHistory", JSON.stringify(itemsPurchased));
 
         //update the cart

@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import "./AddToCart.css";
 import { useNavigate } from "react-router-dom";
 
-export default function AddToCart({ setCartItems }) {
+export default function AddToCart({ setCartItems,itemsPurchased,cartItems }) {
   const [userPrograms, setUserPrograms] = useState([]); // to hold the plans selected by the user
 
   useEffect(() => {
     setUserPrograms(JSON.parse(localStorage.getItem("userSelections")) || []);
     userPrograms.sort((item1, item2) => item1.level - item2.level);
+
+    itemsPurchased.sort((item1, item2) => item1.level - item2.level)
   }, []);
 
   //To update the quantites of the items purchased
@@ -121,6 +123,9 @@ export default function AddToCart({ setCartItems }) {
 
   const navigate = useNavigate();
 
+  const checkItems = () => {
+    const lowestLevelSelected = userPrograms[0].level;
+  }
   const pushToCart = () => {
     //Get the cart items of users from the local storage
     let inCart = JSON.parse(localStorage.getItem("cartItems")) || [];

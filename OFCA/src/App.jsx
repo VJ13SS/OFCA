@@ -24,10 +24,6 @@ export default function App() {
     setItemsPurchased(
       JSON.parse(localStorage.getItem("purchaseHistory")) || []
     );
-    if(itemsPurchased.length> 50){
-      //Displays only the first 50 purchased items 
-      setItemsPurchased(itemsPurchased.slice(0,49));
-    }
 
   }, []);
 
@@ -52,8 +48,8 @@ export default function App() {
       <Navbar cartItems={cartItems} />
 
       <Routes>
-        <Route path="/" element={<Content />} />
-        <Route path="/add-to-cart" element={<AddToCart setCartItems={setCartItems} />} />
+        <Route path="/" element={<Content itemsPurchased={itemsPurchased} />} />
+        <Route path="/add-to-cart" element={<AddToCart setCartItems={setCartItems} itemsPurchased={itemsPurchased} cartItems = {cartItems} />} />
         <Route
           path="/cart"
           element={
