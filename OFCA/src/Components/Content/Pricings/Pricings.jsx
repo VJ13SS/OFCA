@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
-export default function Pricings() {
+export default function Pricings({itemsPurchased, cartItems }) {
 
   const [pricings, setPricings] = useState(pricing_details);
 
@@ -42,9 +42,9 @@ export default function Pricings() {
   //to check for successive selections
   const checkSelections = (lowestLevel,highestLevel) => {
 
-    for(let i = lowestLevel;i <= highestLevel ;i++){
-      if(!selections.some((item) => item.level == i)){
-        alert(`You Can only purchase sequential levels (eg: (1,2), (1,2,3), (3,4,5) you have missed Level ${i}`)
+    for(let i = 1;i <= highestLevel ;i++){
+      if(!selections.some((item) => item.level == i) || itemsPurchased.some((item) => item.level == i) || cartItems.some((item) => item.level == i)){
+        alert(`You can purchase levels one after the other. Ensure you have purchased all the previous levels or had added to the cart for purcgYou haven't purchase Level ${i} neither it is in your cart.`)
         return false
       }
     }
@@ -56,16 +56,19 @@ export default function Pricings() {
   //Other methods can be used.How ever finite number of items(max 5) will be added to the local storage and will be cleared as soon as they are added to cart
 
   const proceedSelections = () => {
-    setDisplayTimer(true);
+    
 
     selections.sort((item1, item2) => item1.level - item2.level);
     
     const lowestLevel = selections[0].level;//lowest selected level
     const highestLevel = selections.at(-1).level;//highest selected level
+
+    /*
     if(!checkSelections(lowestLevel,highestLevel)){
       return
-    }
+    }*/
 
+    setDisplayTimer(true);
     localStorage.setItem("userSelections", JSON.stringify(selections));
 
     setTimeout(() => {

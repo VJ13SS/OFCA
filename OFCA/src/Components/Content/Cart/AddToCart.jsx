@@ -124,7 +124,7 @@ export default function AddToCart({ setCartItems,itemsPurchased,cartItems }) {
   const navigate = useNavigate();
 
   //to check if the user had purchased or is purchasing all the previous levels with respect to the lowest level selecetd inorder to add to the cart
-  const checkItems = () => {
+  /*const checkItems = () => {
     const lowestLevelSelected = userPrograms[0].level;
 
     for(let i = 1; i< lowestLevelSelected;i++){
@@ -134,12 +134,15 @@ export default function AddToCart({ setCartItems,itemsPurchased,cartItems }) {
       }
     }
     return true
-  }
+  }*/
+
   const pushToCart = () => {
     
+    /*
     if(!checkItems()){
+      navigate("/");
       return
-    }
+    }*/
 
     //Get the cart items of users from the local storage
     let inCart = JSON.parse(localStorage.getItem("cartItems")) || [];

@@ -17,7 +17,7 @@ export default function App() {
   //To get the cartitems and the purchase history
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem("cartItems")) || []);
-    cartItems.sort((item1, item2) => item1.level - item2.level);
+    setCartItems(cartItems.sort((item1, item2) => item1.level - item2.level));
 
     setItemsPurchased(
       JSON.parse(localStorage.getItem("purchaseHistory")) || []
@@ -43,7 +43,12 @@ export default function App() {
       <Navbar cartItems={cartItems} />
 
       <Routes>
-        <Route path="/" element={<Content itemsPurchased={itemsPurchased} />} />
+        <Route
+          path="/"
+          element={
+            <Content itemsPurchased={itemsPurchased} cartItems={cartItems} />
+          }
+        />
         <Route
           path="/add-to-cart"
           element={

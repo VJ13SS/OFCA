@@ -13,6 +13,7 @@ const PORT = 3000
 app.use(cors())
 app.use(express.json())
 
+/*
 const transporter = nodemailer.createTransport({
     service:'gmail',
     auth:{
@@ -59,12 +60,14 @@ async function sendPurchaseNotification(items,discount,totalPrice,form){
         console.log(error)
     }
 }
+*/
 
 //routes
 app.get('/', (req,res) => {
     res.send('Hello world VJ 13 SS')
 })
 
+/*
 app.post('/purchase', async (req,res) => {
 
     const { cartItems, discount, totalPrice,form } = req.body;
@@ -90,7 +93,7 @@ app.post('/purchase', async (req,res) => {
 
         
 })
-
+*/
 app.post('/payment', async (req,res) => {
     const {product, token} = req.body
     const idempotencyKey = uuid();

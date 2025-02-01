@@ -52,10 +52,12 @@ export default function Navbar({ cartItems }) {
 
       <div className="nav-right">
         <FaRegClock
-          onClick={() => setTimeout(() => navigate("/purchase-history"), 500)}
+          className="nav-icon"
+          onClick={() => navigate("/purchase-history")}
         />
-        <FaShoppingCart onClick={() => setDisplayCart((prev) => !prev)} />
+        <FaShoppingCart className="nav-icon" onClick={() => setDisplayCart((prev) => !prev)} />
         <FaBars
+        className="nav-icon"
           style={{
             color: "rgb(52,125,235",
             display: location.pathname == "/" ? "block" : "none",
@@ -113,10 +115,8 @@ export default function Navbar({ cartItems }) {
       >
         <div className="nav-cart-links">
         <a href="/cart">Click to vist cart</a>
-        <a href="/purchase-items">Check Out</a>
         </div>
         
-        <h6>*Refresh to load your Cart Items</h6>
         {navCartItems.length == 0 && <h5>No items in cart</h5>}
         {navCartItems.length > 3 && <h6>**scroll down for more</h6>}
         <div className="nav-cart-items">{navCartItems}</div>

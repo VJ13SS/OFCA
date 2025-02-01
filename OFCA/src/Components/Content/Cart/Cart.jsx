@@ -14,9 +14,9 @@ export default function Cart({
   //to check if the user had purchased or is purchasing all the previous levels with respect to the lowest level selecetd inorder to add to the cart
   const checkItems = () => {
     
-    for(let i = 1; i< 5;i++){
+    for(let i = 1; i<=cartItems.at(-1).level;i++){
       if(!cartItems.some((item) => item.level == i) || itemsPurchased.some((item) => item.level == i)){
-        alert(`You have't purchased Level ${i}. You can purchase Level ${i} only after purchsing its previous Levels`)
+        alert(`You have't purchased Level ${i}.Purchase Level ${i} to purchase the higher levels`)
         return false
       }
     }
@@ -46,10 +46,6 @@ export default function Cart({
     const newCartItems = cartItems.filter(
       (item) => !(item.level === level && item.plan === plan)
     );
-
-    if(!checkItems()){
-      return
-    }
 
     setCartItems(newCartItems);
     localStorage.setItem("cartItems", JSON.stringify(newCartItems));
@@ -105,6 +101,10 @@ export default function Cart({
 
   //to navigate to the /purchase-items link
   const purchaseItems = () => {
+    if(!checkItems()){
+      return
+    }
+    
     setDisplayTimer(true);
     setTimeout(() => {
       navigate("/purchase-items");
