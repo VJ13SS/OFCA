@@ -31,23 +31,19 @@ export default function PurchaseHistory({ itemsPurchased, setItemsPurchased }) {
   });
 
   const [displayTimer, setDisplayTimer] = useState(false);
-
+/*
   const clearPurchaseHistory = () => {
     confirm("Do You Wish to Clear the Purchase History?");
     
     localStorage.setItem("purchaseHistory", JSON.stringify([]));
     setItemsPurchased([]);
   };
-
+*/
   return (
     <div className="purchase-history">
       {displayTimer && <div className="timer"></div>}
       <h2>Your Purchase History</h2>
       <h6>*Refresh to load your purchases</h6>
-      {itemsPurchased.length > 0 && (
-        <button onClick={clearPurchaseHistory}>Clear All</button>
-      )}
-
       {itemsPurchased.length == 0 && (
         <span>You haven't Purchased Anything Yet...!</span>
       )}

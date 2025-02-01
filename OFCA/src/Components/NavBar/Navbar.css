@@ -49,11 +49,6 @@
   gap: 7px;
 }
 
-.nav-icon:hover {
-  box-shadow: -5px 0 10px rgba(234, 60, 77, 0.25), 5px 0 10px rgba(234, 60, 77, 0.25),
-    0 5px 10px rgba(234, 60, 77, 0.25), 0 -5px 10px rgba(234, 60, 77, 0.25);
-}
-
 .navbar .nav-links {
   z-index: 5;
   position: absolute;

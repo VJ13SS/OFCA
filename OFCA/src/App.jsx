@@ -17,7 +17,7 @@ export default function App() {
   //To get the cartitems and the purchase history
   useEffect(() => {
     setCartItems(JSON.parse(localStorage.getItem("cartItems")) || []);
-    setCartItems(cartItems.sort((item1, item2) => item1.level - item2.level));
+    cartItems.sort((item1, item2) => item1.level - item2.level);
 
     setItemsPurchased(
       JSON.parse(localStorage.getItem("purchaseHistory")) || []

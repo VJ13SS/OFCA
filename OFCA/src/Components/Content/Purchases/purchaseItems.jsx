@@ -16,6 +16,7 @@ export default function PurchaseItems({
   const navigate = useNavigate();
   const [displayTimer, setDisplayTimer] = useState(false);
 
+  cartItems.sort((item1, item2) => item1.level - item2.level);
   const returnCart = () => {
     setDisplayTimer(true);
     setTimeout(() => {
@@ -70,7 +71,7 @@ export default function PurchaseItems({
                 <span>${item.level}</span>
               </td>
               <td style = "text-align:center;border:1px solid black;padding: 10px;">
-                <span>OFCA Certification Programme ${item.plan}</span>
+                <span>OFCA Certification Program ${item.plan}</span>
               </td>
               <td style = "text-align:center;border:1px solid black;padding: 10px;">
                 <span>${item.quantity}</span>
@@ -105,36 +106,6 @@ export default function PurchaseItems({
     });
 
     return updatedItems;
-  };
-
-  const purchase = async (e) => {
-    e.preventDefault();
-    const data = { cartItems, discount, totalPrice, form };
-
-    try {
-      const response = await axios.post("http://localhost:3000/purchase", data);
-      let purchased = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
-
-      const updatedItemsPurchased = updatePurchaseHistory(purchased, cartItems);
-      setItemsPurchased(updatedItemsPurchased);
-
-      if (updatedItemsPurchased.length > 50) {
-        setItemsPurchased(updatedItemsPurchased.slice(0, 49));
-      }
-
-      //Updating the local storage
-      localStorage.setItem("purchaseHistory", JSON.stringify(itemsPurchased));
-
-      //update the cart
-      setCartItems([]);
-      localStorage.setItem("cartItems", JSON.stringify([]));
-
-      alert("Purchased");
-      returnHome();
-    } catch (error) {
-      console.error("Some thing went wrong");
-      alert(error);
-    }
   };
 
   //Connecting the stripe API
@@ -174,10 +145,10 @@ export default function PurchaseItems({
 
   //Function to link the email js email service
   const sendEmail = () => {
-    purchasedDate()
+    
     setForm({ ...form, products_table: generateProductsTable() });
 
-    emailjs.send("service_", "template_", form, "7xzu1_").then(
+    emailjs.send("service_44nolmr", "template_ud3pu5m", form, "7xzu1_S-S0TbFD6yt").then(
       (response) => {
         let purchased =
           JSON.parse(localStorage.getItem("purchaseHistory")) || [];
@@ -187,14 +158,16 @@ export default function PurchaseItems({
         );
 
         setItemsPurchased(updatedItemsPurchased);
+        //setItemsPurchased((prev) => ({...prev,purchasedOn:purchasedDate()}))
         
-        localStorage.setItem("purchaseHistory", JSON.stringify(itemsPurchased));
+        localStorage.setItem("purchaseHistory", JSON.stringify(updatedItemsPurchased));
 
         //update the cart
         setCartItems([]);
         localStorage.setItem("cartItems", JSON.stringify([]));
 
         alert("Email send", response);
+        navigate('/')
       },
       (error) => {
         alert("Error", error);
@@ -211,7 +184,7 @@ export default function PurchaseItems({
       {displayTimer && <div className="timer"></div>}
 
       <h1>CHECKOUT</h1>
-      <form onSubmit={purchase}>
+      <form>
         <h2>Billing Details</h2>
 
         <label htmlFor="User Name">

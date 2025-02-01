@@ -8,7 +8,7 @@ export default function Navbar({ cartItems }) {
 
   const [displayNavLinks, setDisplayNavLinks] = useState(false);
   const [displayCart, setDisplayCart] = useState(false);
-
+  cartItems.sort((item1, item2) => item1.level - item2.level);
   const navigate = useNavigate();
 
  /// cartItems.sort((item1, item2) => item1.level - item2.level);

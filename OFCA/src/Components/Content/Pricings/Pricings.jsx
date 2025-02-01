@@ -213,8 +213,11 @@ export default function Pricings({itemsPurchased, cartItems }) {
         <h2>OUR PROGRAMS</h2>
       </div>
       <h5>
-        **You Can Select Multiple Programs by Selecting the respective Plans...!
+        *You Can Select Multiple Programs by Selecting the respective Plans...!
+        <br></br>
+        **You can only purchase higher levels only after purchasing the lower levels
       </h5>
+      
       <div className="pricings-details">{pricingData}</div>
       {anySelection && (
         <div className="proceed-selections">
