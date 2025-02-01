@@ -123,10 +123,24 @@ export default function AddToCart({ setCartItems,itemsPurchased,cartItems }) {
 
   const navigate = useNavigate();
 
+  //to check if the user had purchased or is purchasing all the previous levels with respect to the lowest level selecetd inorder to add to the cart
   const checkItems = () => {
     const lowestLevelSelected = userPrograms[0].level;
+
+    for(let i = 1; i< lowestLevelSelected;i++){
+      if(!cartItems.some((item) => item.level == i) || itemsPurchased.some((item) => item.level == i)){
+        alert(`You have't purchased Level ${i}. You can purchase Level ${lowestLevelSelected} only after purchsing its previous Levels`)
+        return false
+      }
+    }
+    return true
   }
   const pushToCart = () => {
+    
+    if(!checkItems()){
+      return
+    }
+
     //Get the cart items of users from the local storage
     let inCart = JSON.parse(localStorage.getItem("cartItems")) || [];
 

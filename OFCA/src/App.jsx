@@ -16,19 +16,16 @@ export default function App() {
 
   //To get the cartitems and the purchase history
   useEffect(() => {
-
     setCartItems(JSON.parse(localStorage.getItem("cartItems")) || []);
     cartItems.sort((item1, item2) => item1.level - item2.level);
-
 
     setItemsPurchased(
       JSON.parse(localStorage.getItem("purchaseHistory")) || []
     );
-
   }, []);
 
   //to identify the unique level of plans to calculate the discount
-  const selectedLevels = new Set();//to store the unique lebels
+  const selectedLevels = new Set(); //to store the unique lebels
   cartItems.forEach((item) => {
     selectedLevels.add(item.level);
   });
@@ -42,14 +39,21 @@ export default function App() {
   );
 
   return (
-
     <div className="app">
-
       <Navbar cartItems={cartItems} />
 
       <Routes>
         <Route path="/" element={<Content itemsPurchased={itemsPurchased} />} />
-        <Route path="/add-to-cart" element={<AddToCart setCartItems={setCartItems} itemsPurchased={itemsPurchased} cartItems = {cartItems} />} />
+        <Route
+          path="/add-to-cart"
+          element={
+            <AddToCart
+              setCartItems={setCartItems}
+              itemsPurchased={itemsPurchased}
+              cartItems={cartItems}
+            />
+          }
+        />
         <Route
           path="/cart"
           element={
@@ -58,6 +62,7 @@ export default function App() {
               setCartItems={setCartItems}
               discount={discount}
               totalPrice={totalPrice}
+              itemsPurchased={itemsPurchased}
             />
           }
         />
@@ -76,12 +81,16 @@ export default function App() {
         />
         <Route
           path="/purchase-history"
-          element={<PurchaseHistory itemsPurchased={itemsPurchased} setItemsPurchased = {setItemsPurchased}/>}
+          element={
+            <PurchaseHistory
+              itemsPurchased={itemsPurchased}
+              setItemsPurchased={setItemsPurchased}
+            />
+          }
         />
       </Routes>
 
       <Footer />
-
     </div>
   );
 }
