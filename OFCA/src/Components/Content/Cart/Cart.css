@@ -47,13 +47,13 @@
 
 .cart-item{
     display: flex;
-    gap: 10px;
+    gap: 20px;
     justify-content:space-around ;
     align-items: center;
     width: 80%;
     border-bottom: 1px solid black;
     height: 250px;
-    font-size: 25px;
+    font-size: 22px;
 }
 
 
@@ -83,7 +83,7 @@
 .cart-item .cart-item-details{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 7px;
     width: 50%;
 }
 
@@ -93,6 +93,7 @@
 
 
 @media (max-width:768px){
+    
     .cart-header{
         width:100%;
     }
@@ -111,7 +112,8 @@
     }
 }
 
-@media (max-width:500px){
+@media (max-width:600px){
+    
     .cart-header{
         width:100%;
         font-size: 22px;
