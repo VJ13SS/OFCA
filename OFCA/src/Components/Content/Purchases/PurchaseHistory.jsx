@@ -44,9 +44,6 @@ export default function PurchaseHistory({ itemsPurchased }) {
   return (
     <div className="purchase-history">
       {displayTimer && <div className="timer"></div>}
-      <button className="back-button" onClick={returnHome}>
-        Back
-      </button>
       <h2>Your Purchase History</h2>
       <h6>*Refresh to load your purchases</h6>
       {itemsPurchased.length == 0 && (
