@@ -48,7 +48,7 @@ export default function PurchaseHistory({ itemsPurchased }) {
         Back
       </button>
       <h2>Your Purchase History</h2>
-      <h6>*Refresh to load your purchases</h6>
+      <h6>*Refresh to load your latest purchases purchases</h6>
       {itemsPurchased.length == 0 && (
         <span>You haven't Purchased Anything Yet...!</span>
       )}
