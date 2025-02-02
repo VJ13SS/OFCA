@@ -2,10 +2,10 @@
 .side-links{
     z-index: 35;
     position: fixed;
-    top: 50vh;
+    top: 40vh;
     right:0;
     transition: all 0.25s linear;
-    
+
   }
   
   .side-links button{
@@ -54,4 +54,10 @@
     .side-links{
         width: 50vw;
     }
+}
+
+@media (max-width: 500px) {
+  .side-links{
+      width: 70vw;
+  }
 }

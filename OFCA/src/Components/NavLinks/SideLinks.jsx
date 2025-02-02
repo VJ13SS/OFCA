@@ -14,14 +14,14 @@ export default function Sidelinks() {
     <div
       className="side-links"
       style={{
-        width:displaySideLinks?'40%':'0%',
+        width:displaySideLinks?'60vw':'0%',
         height: displaySideLinks ? "270px" : "0px",
         borderTop: displaySideLinks ? "3px solid blue" : "",
         display: location.pathname == "/" ? "block" : "none",
       }}
     >
       {/*positon of button is relative to the position of the side links container */}
-      <button onClick={() => setDisplaySideLinks(prev => !prev)} style={{right:displaySideLinks?'39%':'0'}}>{!displaySideLinks?<FaLessThan size={15}/>:<FaGreaterThan size={15}/>}</button>
+      <button onClick={() => setDisplaySideLinks(prev => !prev)} style={{right:displaySideLinks?'59vw':'0'}}>{!displaySideLinks?<FaLessThan size={15}/>:<FaGreaterThan size={15}/>}</button>
       <ul style={{ display: displaySideLinks ? "flex" : "none" }}>
         
         <li>

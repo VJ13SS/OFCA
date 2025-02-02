@@ -143,12 +143,12 @@
   animation: timer 2s linear 1 forwards;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   .pricings {
     margin-top: 50px;
   }
   .pricings-details .pricing {
-    width: 90%;
+    width: 95%;
   }
   .pricing span,
   .pricing h1 span,

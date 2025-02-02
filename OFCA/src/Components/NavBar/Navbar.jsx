@@ -47,9 +47,7 @@ export default function Navbar({ cartItems }) {
           <img src="./Images/OFCA_LOGO.png" />
         </Link>
       </div>
-      <div className="nav-center">
-        <h2>Fitness Is Life</h2>
-      </div>
+      
 
       <div className="nav-right">
         <FaRegClock
