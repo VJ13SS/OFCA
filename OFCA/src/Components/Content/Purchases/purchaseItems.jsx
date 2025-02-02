@@ -123,30 +123,6 @@ export default function PurchaseItems({
     return updatedItems;
   };
 
-  //Connecting the stripe API
-  const makePayment = async (token) => {
-    const body = {
-      token,
-      cartItems,
-    };
-    const headers = {
-      "Content-Type": "application/json",
-    };
-    const response = await fetch("http://localhost:3000/payment", {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(body),
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      alert("Payment successfull");
-    } else {
-      alert("Payment Failed");
-    }
-  };
-
   //Purchase Confirmation
   const completePurchase = () => {
     let purchased =
@@ -186,7 +162,31 @@ export default function PurchaseItems({
     );
   };
 
-  
+  //Connecting the stripe API
+  const makePayment = async (token) => {
+    const body = {
+      token,
+      cartItems,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const response = await fetch("http://localhost:3000/payment", {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      alert("Payment successfull");
+      sendEmail()
+    } else {
+      alert("Payment Failed");
+    }
+  };
+
   return (
     <div className="purchase-items">
       <button onClick={completePurchase}>Send</button>
