@@ -176,7 +176,7 @@
 }
 .about-section-4 p{
     max-width: 90%;
-    line-height: 27px;
+    line-height: 25px;
     text-align: left;
 }
 
@@ -241,13 +241,11 @@
         padding: 10px;
     }
     .card .card-content{
-        font-size: 10px;
+        font-size: 12px;
     }
     .about-section-4 span{
         font-size: 25px;
         margin-bottom: 20px;
     }
-    .about-section-4 p{
-        line-height: 20px;
-    }
+    
 }
