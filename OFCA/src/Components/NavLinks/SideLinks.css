@@ -5,7 +5,8 @@
     top: 30vh;
     right:0;
     transition: all 0.25s linear;
-
+    height: 300px;
+    overflow: scroll;
   }
   
   .side-links button{
