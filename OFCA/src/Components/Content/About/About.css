@@ -41,7 +41,7 @@
 
 .about-section-1 span{
     font-size: 45px;
-    font-weight: 300;
+    font-weight: bold;
     z-index: 5;
 }
 
@@ -84,7 +84,7 @@
 
 .about-cards .card{
     width:49%;
-    height: 350px;
+    height: 380px;
     color: white;
     background-color: black;
     border: 5px solid white;
@@ -108,7 +108,7 @@
     background-position: center;
     background-size: cover;
     z-index: 1;
-    opacity: 0.3;
+    opacity: 0.5;
     border-radius: 10px;
 }
 
@@ -130,6 +130,7 @@
     margin-top: 20px;
     max-width: 90%;
     max-height: fit-content;
+    line-height: 20px;
 }
 
 .about-section-3{
@@ -162,6 +163,7 @@
 .rectangle p{
     max-width: 90%;
     margin-top: 10px;
+    line-height: 25px;
 }
 
 .about-section-4{
@@ -174,7 +176,7 @@
 }
 .about-section-4 p{
     max-width: 90%;
-    line-height: 25px;
+    line-height: 27px;
     text-align: left;
 }
 
@@ -237,6 +239,9 @@
     .about-cards .card{
         height: fit-content;
         padding: 10px;
+    }
+    .card .card-content{
+        font-size: 10px;
     }
     .about-section-4 span{
         font-size: 25px;
