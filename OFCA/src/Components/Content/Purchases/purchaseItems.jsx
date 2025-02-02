@@ -97,12 +97,27 @@ export default function PurchaseItems({
     }));
   }, [totalPrice, discount]);
 
+  //to get the purchased date of the program
+  const purchasedDate = () => {
+    const today = new Date();
+    const formattedDate = today.toISOString().split("T")[0];
+    return formattedDate
+  };
+
   //Updating the purchase history
   const updatePurchaseHistory = (items, choices) => {
     let updatedItems = [...items];
 
     choices.forEach((element) => {
-      updatedItems.unshift({ ...element });
+      const index = updatedItems.findIndex(item => item.level == element.level && item.plan == element.plan)
+
+      if(index != -1){
+        updatedItems[index] = {...updatedItems[index],purchasedOn:purchasedDate()}
+      }
+      else{
+        updatedItems.unshift({ ...element,purchasedOn:purchasedDate() });
+      }
+      
     });
 
     return updatedItems;
@@ -132,25 +147,9 @@ export default function PurchaseItems({
     }
   };
 
-  //to get the purchased date of the program
-  const purchasedDate = () => {
-    const today = new Date();
-    const formattedDate = today.toISOString().split("T")[0];
-    setCartItems((prev) =>
-      prev.map((item) => {
-        return { ...item, purchasedOn: formattedDate };
-      })
-    );
-  };
-
-  //Function to link the email js email service
-  const sendEmail = () => {
-    
-    setForm({ ...form, products_table: generateProductsTable() });
-
-    emailjs.send("service_44nolmr", "template_ud3pu5m", form, "7xzu1_S-S0TbFD6yt").then(
-      (response) => {
-        let purchased =
+  //Purchase Confirmation
+  const completePurchase = () => {
+    let purchased =
           JSON.parse(localStorage.getItem("purchaseHistory")) || [];
         const updatedItemsPurchased = updatePurchaseHistory(
           purchased,
@@ -166,7 +165,19 @@ export default function PurchaseItems({
         setCartItems([]);
         localStorage.setItem("cartItems", JSON.stringify([]));
 
-        alert("Email send", response);
+        alert("Purchase Completed");
+        navigate('/')
+  }
+
+  //Function to link the email js email service
+  const sendEmail = () => {
+    
+    setForm({ ...form, products_table: generateProductsTable() });
+
+    emailjs.send("service_44nolmr", "template_ud3pu5m", form, "7xzu1_S-S0TbFD6yt").then(
+      (response) => {
+        completePurchase()
+        alert("Purchase Completed",response);
         navigate('/')
       },
       (error) => {
@@ -175,9 +186,10 @@ export default function PurchaseItems({
     );
   };
 
+  
   return (
     <div className="purchase-items">
-      <button onClick={sendEmail}>Send</button>
+      <button onClick={completePurchase}>Send</button>
       <button className="back-button" onClick={returnCart}>
         Back
       </button>

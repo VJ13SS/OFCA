@@ -1,5 +1,5 @@
 import "./Footer.css";
-import {FaEnvelope,FaFacebook,FaInstagram,FaYoutube} from 'react-icons/fa'
+import {FaEnvelope,FaFacebook,FaInstagram,FaLinkedin,FaYoutube} from 'react-icons/fa'
 
 export default function Footer() {
   return (
@@ -19,8 +19,9 @@ export default function Footer() {
         <div className="links">
           
           <span className="icon" style={{color:'blue',marginLeft:'10px'}}><FaFacebook /></span>
-          <span className="icon" style={{color:'red'}}><FaInstagram /></span>
+          <span className="icon" style={{color:'rgb(252,3,115'}}><FaInstagram /></span>
           <span className="icon" style={{color:'red'}}><FaYoutube /></span>
+          <span className="icon" style={{color:'rgb(3,119,252'}}><FaLinkedin /></span>
         </div>
       </div>
       <span style={{color:'gray',fontSize:'10px'}}>Created by VJ 13 SS</span>

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "./PurchaseHistory.css";
+import { useNavigate } from "react-router-dom";
 
-export default function PurchaseHistory({ itemsPurchased, setItemsPurchased }) {
-
+export default function PurchaseHistory({ itemsPurchased }) {
+  itemsPurchased.sort((item1, item2) => item1.level - item2.level);
   const historyItems = itemsPurchased.map((item, index) => {
     return (
       <div className="purchased-item" key={index}>
@@ -31,17 +32,21 @@ export default function PurchaseHistory({ itemsPurchased, setItemsPurchased }) {
   });
 
   const [displayTimer, setDisplayTimer] = useState(false);
-/*
-  const clearPurchaseHistory = () => {
-    confirm("Do You Wish to Clear the Purchase History?");
-    
-    localStorage.setItem("purchaseHistory", JSON.stringify([]));
-    setItemsPurchased([]);
+
+  const navigate = useNavigate();
+  const returnHome = () => {
+    setDisplayTimer(true);
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   };
-*/
+  
   return (
     <div className="purchase-history">
       {displayTimer && <div className="timer"></div>}
+      <button className="back-button" onClick={returnHome}>
+        Back
+      </button>
       <h2>Your Purchase History</h2>
       <h6>*Refresh to load your purchases</h6>
       {itemsPurchased.length == 0 && (

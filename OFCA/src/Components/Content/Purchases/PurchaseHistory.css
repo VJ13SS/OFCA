@@ -12,23 +12,6 @@
     
 }
 
-.purchase-history button{
-    width: 20%;
-    height: 40px;
-    background-color: rgb(234, 60, 77);
-    border: none;
-    border-radius: 50px;
-    color:white;
-    font-weight: bold;
-    font-size: 20px;
-    transition: all 0.5s linear;
-    margin-bottom: 30px;
-}
-
-.purchase-history button:hover{
-    background-color: rgb(203, 15, 34);
-}
-
 .purchased-items{
     width: 100%;
     display: flex;

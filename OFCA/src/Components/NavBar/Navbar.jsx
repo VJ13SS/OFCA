@@ -3,6 +3,7 @@ import { FaShoppingCart, FaBars, FaRegClock } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { MdDelete } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AiOutlineClose } from "react-icons/ai";
 
 export default function Navbar({ cartItems }) {
 
@@ -115,6 +116,7 @@ export default function Navbar({ cartItems }) {
       >
         <div className="nav-cart-links">
         <a href="/cart">Click to vist cart</a>
+        <AiOutlineClose onClick={() => setDisplayCart((prev) => !prev)}/>
         </div>
         
         {navCartItems.length == 0 && <h5>No items in cart</h5>}

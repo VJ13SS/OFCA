@@ -23,11 +23,7 @@ export default function Sidelinks() {
       {/*positon of button is relative to the position of the side links container */}
       <button onClick={() => setDisplaySideLinks(prev => !prev)} style={{right:displaySideLinks?'39%':'0'}}>{!displaySideLinks?<FaLessThan size={15}/>:<FaGreaterThan size={15}/>}</button>
       <ul style={{ display: displaySideLinks ? "flex" : "none" }}>
-        <li>
-          <a href="#" onClick={() => setDisplaySideLinks(false)}>
-            Home
-          </a>
-        </li>
+        
         <li>
           <a href="#about-page" onClick={() => setDisplaySideLinks(false)}>
             About Us
@@ -44,6 +40,16 @@ export default function Sidelinks() {
         <li>
           <a href="#pricing-section" onClick={() => setDisplaySideLinks(false)}>
             Programs
+          </a>
+        </li>
+        <li>
+          <a href="/cart" onClick={() => setDisplaySideLinks(false)}>
+            Cart
+          </a>
+        </li>
+        <li style={{border:'1px solid black'}}>
+          <a href="#" onClick={() => setDisplaySideLinks(false)}>
+            Return To Top
           </a>
         </li>
       </ul>
