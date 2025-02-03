@@ -126,6 +126,7 @@ export default function PurchaseItems({
   
   //Purchase Confirmation
   const completePurchase = () => {
+    sendEmail()
     let purchased =
           JSON.parse(localStorage.getItem("purchaseHistory")) || [];
         const updatedItemsPurchased = updatePurchaseHistory(
@@ -141,8 +142,8 @@ export default function PurchaseItems({
         //update the cart
         setCartItems([]);
         localStorage.setItem("cartItems", JSON.stringify([]));
-        sendEmail()
-        alert("Purchase Completed");
+        
+        //alert("Purchase Completed");
         navigate('/')
   }
 
@@ -151,7 +152,7 @@ export default function PurchaseItems({
     
     setForm({ ...form, products_table: generateProductsTable() });
 
-    emailjs.send(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID, form, process.env.REACT_APP_PUBLIC_KEY).then(
+    emailjs.send('service_44nolmr', 'template_ud3pu5m', form, '7xzu1_S-S0TbFD6yt').then(
       (response) => {
         completePurchase()
         alert("Purchase Completed",response);
@@ -168,7 +169,7 @@ export default function PurchaseItems({
     const body = {
       token,
       cartItems,
-    };
+    }; 
     const headers = {
       "Content-Type": "application/json",
     };
