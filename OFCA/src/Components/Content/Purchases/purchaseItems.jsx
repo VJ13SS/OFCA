@@ -112,7 +112,7 @@ export default function PurchaseItems({
       const index = updatedItems.findIndex(item => item.level == element.level && item.plan == element.plan)
 
       if(index != -1){
-        updatedItems[index] = {...updatedItems[index],purchasedOn:purchasedDate()}
+        updatedItems[index] = {...updatedItems[index],purchasedOn:purchasedDate(), quantity: element.quantity}
       }
       else{
         updatedItems.unshift({ ...element,purchasedOn:purchasedDate() });
