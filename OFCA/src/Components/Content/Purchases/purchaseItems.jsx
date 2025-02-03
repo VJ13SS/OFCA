@@ -154,7 +154,7 @@ export default function PurchaseItems({
     for(let key in form){
       if(form[key] == ''){
         alert(`Missing Field ${key}`)
-        
+        return
       }
     }
     emailjs.send('service_44nolmr', 'template_ud3pu5m', form, '7xzu1_S-S0TbFD6yt').then(
@@ -196,7 +196,7 @@ export default function PurchaseItems({
 
   return (
     <div className="purchase-items">
-      <button onClick={completePurchase}>Send</button>
+      <button onClick={sendEmail}>Send</button>
       <button className="back-button" onClick={returnCart}>
         Back
       </button>
@@ -206,7 +206,7 @@ export default function PurchaseItems({
       <form>
         <h2>Billing Details</h2>
 
-        <label htmlFor="User Name">
+        <div className="label">
           <h2>User Name </h2>
           <div className="two-inputs">
             <input
@@ -227,8 +227,8 @@ export default function PurchaseItems({
               }
             />
           </div>
-        </label>
-        <label htmlFor="Country/Region">
+        </div>
+        <div className="label">
           <h2>Country/Region </h2>
           <input
             type="text"
@@ -239,8 +239,8 @@ export default function PurchaseItems({
             }
             required
           />
-        </label>
-        <label htmlFor="State/County">
+        </div>
+        <div className="label">
           <h2>State /County</h2>
           <input
             type="text"
@@ -251,8 +251,8 @@ export default function PurchaseItems({
             }
             required
           />
-        </label>
-        <label htmlFor="Town/City">
+        </div>
+        <div className="label">
           <h2>Town/City </h2>
           <input
             type="text"
@@ -263,8 +263,8 @@ export default function PurchaseItems({
             }
             required
           />
-        </label>
-        <label htmlFor="Street Address">
+        </div>
+        <div className="label">
           <h2>Street Address </h2>
           <div className="two-inputs">
             <input
@@ -285,9 +285,9 @@ export default function PurchaseItems({
               }
             />
           </div>
-        </label>
+        </div>
 
-        <label htmlFor="PostCode/PinCode/ZipCode">
+        <div className="label">
           <h2>Post/Pin/Zip Code</h2>
           <input
             type="text"
@@ -298,8 +298,8 @@ export default function PurchaseItems({
             }
             required
           />
-        </label>
-        <label htmlFor="Phone">
+        </div>
+        <div className="label">
           <h2>Phone </h2>
           <input
             type="phone"
@@ -310,8 +310,8 @@ export default function PurchaseItems({
             }
             required
           />
-        </label>
-        <label htmlFor="Email Address">
+        </div>
+        <div className="label">
           <h2>Email: </h2>
           <input
             type="email"
@@ -322,7 +322,7 @@ export default function PurchaseItems({
             }
             required
           />
-        </label>
+        </div>
 
         <h2 style={{ marginBlock: "20px" }}>ADDITIONAL INFORMATION</h2>
         <div className="additional_information">

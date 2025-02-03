@@ -22,7 +22,7 @@
     justify-content: center;
 }
 
-form label,form .additional_information{
+form .label,form .additional_information{
     display: flex;
     width: 100%;
     gap: 10px;
@@ -33,19 +33,19 @@ form label,form .additional_information{
     height: 60px;
 }
 
-label{
+.label{
     width: 90%;
     display: flex;
     gap: 5px;
     justify-content: space-between;
 }
-label h2,.additional_information h3{
+.label h2,.additional_information h3{
     width: 20%;
     max-width: 20%;
     font-size: 20px;
 }
 
-label .two-inputs{
+.label .two-inputs{
     width:90%;
     display:flex;
     justify-content: center;
@@ -55,7 +55,7 @@ label .two-inputs{
 .two-inputs input{
     width: 35%;
 }
-label input{
+.label input{
     width: 70%;
     height: 35px;
     padding-left: 10px;
@@ -114,23 +114,23 @@ table td,table th{
     .purchase-items form{
         width: 90%;
     }
-    label{
+    .label{
         flex-direction: column;
     }
-    label input{
+    .label input{
         height: 30px;
     }
-    label input,textarea{
+    .label input,textarea{
         width: 90%;
     }
     .additional_information{
         flex-direction: column;
         height: 120px;
     }
-    label h2,.additional_information h3{
+    .label h2,.additional_information h3{
         font-size: 17px;
     }
-    label .two-inputs{
+    .label .two-inputs{
         flex-direction: column;
     }
     .two-inputs input{
