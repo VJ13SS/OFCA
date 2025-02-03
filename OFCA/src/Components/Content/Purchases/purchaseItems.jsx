@@ -126,7 +126,10 @@ export default function PurchaseItems({
   
   //Purchase Confirmation
   const completePurchase = () => {
-    sendEmail()
+    if(!sendEmail()){
+      return 
+    }
+
     let purchased =
           JSON.parse(localStorage.getItem("purchaseHistory")) || [];
         const updatedItemsPurchased = updatePurchaseHistory(
@@ -145,19 +148,27 @@ export default function PurchaseItems({
         
         //alert("Purchase Completed");
         navigate('/')
+        
   }
 
   //Function to link the email js email service
   const sendEmail = () => {
     
     setForm({ ...form, products_table: generateProductsTable() });
-
+    for(let key in form){
+      if(form[key] == ''){
+        alert(`Missing Field ${key}`)
+        return false
+      }
+    }
     emailjs.send('service_44nolmr', 'template_ud3pu5m', form, '7xzu1_S-S0TbFD6yt').then(
       (response) => {
         alert('Purchase Completed')
+        return true
       },
       (error) => {
         alert("Error", error);
+        return false
       }
     );
   };
