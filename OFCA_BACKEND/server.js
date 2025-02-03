@@ -16,6 +16,10 @@ app.get('/', (req,res) => {
     res.send('Hello world VJ 13 SS')
 })
 
+app.get('/home', (req,res) => {
+    res.send('Hello world VJ 13 SS')
+})
+
 app.post('/payment', async (req,res) => {
     const {product, token} = req.body
     const idempotencyKey = uuid();
