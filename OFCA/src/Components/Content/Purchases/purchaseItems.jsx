@@ -150,7 +150,7 @@ export default function PurchaseItems({
     
     setForm({ ...form, products_table: generateProductsTable() });
 
-    emailjs.send("service_44nolmr", "template_ud3pu5m", form, "7xzu1_S-S0TbFD6yt").then(
+    emailjs.send(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID, form, process.env.REACT_APP_PUBLIC_KEY).then(
       (response) => {
         completePurchase()
         alert("Purchase Completed",response);
@@ -171,7 +171,7 @@ export default function PurchaseItems({
     const headers = {
       "Content-Type": "application/json",
     };
-    const response = await fetch("http://localhost:3000/payment", {
+    const response = await fetch("https://ofca-backend.vercel.app/payment", {
       method: "POST",
       headers: headers,
       body: JSON.stringify(body),
