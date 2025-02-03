@@ -154,9 +154,7 @@ export default function PurchaseItems({
 
     emailjs.send('service_44nolmr', 'template_ud3pu5m', form, '7xzu1_S-S0TbFD6yt').then(
       (response) => {
-        completePurchase()
-        alert("Purchase Completed",response);
-        navigate('/')
+        alert('Purchase Completed')
       },
       (error) => {
         alert("Error", error);
