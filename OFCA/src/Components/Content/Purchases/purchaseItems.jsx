@@ -123,6 +123,7 @@ export default function PurchaseItems({
     return updatedItems;
   };
 
+  
   //Purchase Confirmation
   const completePurchase = () => {
     let purchased =
@@ -140,7 +141,7 @@ export default function PurchaseItems({
         //update the cart
         setCartItems([]);
         localStorage.setItem("cartItems", JSON.stringify([]));
-
+        sendEmail()
         alert("Purchase Completed");
         navigate('/')
   }
