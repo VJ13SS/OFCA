@@ -37,14 +37,15 @@ export default function PurchaseItems({
     discount: 0,
     finalPrice: 0,
     UserName: "",
-    EmailAddress: "",
     CompanyName: "Not Available",
     Country_or_Region: "",
     State_or_County: "",
     Town_or_City: "",
     HouseNumber_and_StreetName: "",
+    Apartment_or_Suite_or_Unit:"None",
     PostCode_or_PinCode_or_ZipCode: "",
     Phone: "",
+    EmailAddress: "",
     additional_information: "Not Available",
     products_table: "",
   });
@@ -279,7 +280,7 @@ export default function PurchaseItems({
             <input
               type="text"
               placeholder="Apartment, Suite, Unit ,etc .(optional): "
-              name="Apartment_or_Suite/Unit"
+              name="Apartment_or_Suite_or_Unit"
               onChange={(e) =>
                 setForm({ ...form, [e.target.name]: e.target.value })
               }
