@@ -195,6 +195,7 @@ export default function PurchaseItems({
     }
   };
 
+  alert(process.env.REACT_APP_SECRET_KEY)
   return (
     <div className="purchase-items">
       <button onClick={sendEmail}>Send</button>
