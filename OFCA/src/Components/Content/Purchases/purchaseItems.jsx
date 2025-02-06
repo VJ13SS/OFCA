@@ -15,7 +15,7 @@ export default function PurchaseItems({
 }) {
   const navigate = useNavigate();
   const [displayTimer, setDisplayTimer] = useState(false);
-
+  
   cartItems.sort((item1, item2) => item1.level - item2.level);
   const returnCart = () => {
     setDisplayTimer(true);
@@ -204,6 +204,7 @@ export default function PurchaseItems({
       {displayTimer && <div className="timer"></div>}
 
       <h1>CHECKOUT</h1>
+      <span>{process.env.REACT_APP_SECRET_KEY}</span>
       <form>
         <h2>Billing Details</h2>
 
