@@ -13,7 +13,8 @@ app.use(express.json())
 
 //routes
 app.get('/', (req,res) => {
-    res.send('Hello world VJ 13 SS')
+    
+    res.send(`Hello world ${process.env.BACKEND_CHECK}`)
 })
 
 app.get('/home', (req,res) => {
