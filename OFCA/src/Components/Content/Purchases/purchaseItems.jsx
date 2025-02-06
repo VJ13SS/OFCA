@@ -194,8 +194,6 @@ export default function PurchaseItems({
       alert("Payment Failed");
     }
   };
-
-  alert(process.env.REACT_APP_SECRET_KEY)
   return (
     <div className="purchase-items">
       <button onClick={sendEmail}>Send</button>
