@@ -13,7 +13,7 @@ app.use(express.json())
 
 //routes
 app.get('/', (req,res) => {
-    res.send(`Hello vj`)
+    res.send(process.env.STRIPE_SECRET_KEY)
 })
 
 app.get('/home', (req,res) => {
