@@ -13,7 +13,6 @@ app.use(express.json())
 
 //routes
 app.get('/', (req,res) => {
-    
     res.send(`Hello world ${process.env.BACKEND_CHECK}`)
 })
 
