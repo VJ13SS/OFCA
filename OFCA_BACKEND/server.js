@@ -13,7 +13,7 @@ app.use(express.json())
 
 //routes
 app.get('/', (req,res) => {
-    res.send(`Hello world`)
+    res.send(`Hello vj`)
 })
 
 app.get('/home', (req,res) => {
