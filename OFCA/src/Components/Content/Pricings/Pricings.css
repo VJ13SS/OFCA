@@ -37,9 +37,9 @@
 
 .pricings-details .pricing {
   border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 7px;
   width: 400px;
-  height:auto;
+  height: auto;
   padding: 20px;
   display: flex;
   text-align: left;
@@ -103,6 +103,7 @@
   height: 35px;
   text-align: center;
   transition: all 0.3s linear;
+  border-radius: 5px;
 }
 
 .pricing-selections div span {
@@ -157,7 +158,7 @@
   }
 }
 
-@media(max-width:500px){
+@media (max-width: 500px) {
   .pricings-header h2 {
     font-size: 25px;
     letter-spacing: 3px;
@@ -170,12 +171,12 @@
     font-size: 14px;
     margin-bottom: 15px;
   }
-  
+
   .pricing h1 {
     font-size: 25px;
     margin-bottom: 10px;
   }
-  
+
   .pricing span {
     font-size: 17px;
     margin-bottom: 14px;

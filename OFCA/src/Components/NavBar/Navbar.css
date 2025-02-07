@@ -50,7 +50,7 @@
 }
 
 .navbar .nav-links {
-  z-index: 5;
+  z-index: 15;
   position: absolute;
   top: var(--top-offset); /*corresponds to the height of the navbar*/
   left: 17%;

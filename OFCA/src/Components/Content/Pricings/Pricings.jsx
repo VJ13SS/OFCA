@@ -66,14 +66,14 @@ export default function Pricings({itemsPurchased, cartItems }) {
         style={{
           border:
             item.level == 1
-              ? "3px solid rgb(14,141,204)"
+              ? "2px solid rgb(14,141,204)"
               : item.level == 2
-              ? "3px solid black"
+              ? "2px solid black"
               : item.level == 3
-              ? "3px solid red"
+              ? "2px solid red"
               : item.level == 4
-              ? "3px solid orange"
-              : "3px solid rgb(12,176,26)",
+              ? "2px solid orange"
+              : "2px solid rgb(12,176,26)",
           boxShadow: item.selected
             ? "-5px 0 10px rgba(0,0,0,0.25), 5px 0 10px rgba(0,0,0,0.25),0 5px 10px rgba(0,0,0,0.25),0 -5px 10px rgba(0,0,0,0.25)"
             : "",
@@ -117,14 +117,14 @@ export default function Pricings({itemsPurchased, cartItems }) {
             style={{
               border:
                 item.level == 1
-                  ? "3px solid rgb(14,141,204)"
+                  ? "2px solid rgb(14,141,204)"
                   : item.level == 2
-                  ? "3px solid black"
+                  ? "2px solid black"
                   : item.level == 3
-                  ? "3px solid red"
+                  ? "2px solid red"
                   : item.level == 4
-                  ? "3px solid orange"
-                  : "3px solid rgb(12,176,26)",
+                  ? "2px solid orange"
+                  : "2px solid rgb(12,176,26)",
               backgroundColor: item.selected
                 ? item.plan == "3 Monthly Payments"
                   ? item.level == 1
@@ -152,14 +152,14 @@ export default function Pricings({itemsPurchased, cartItems }) {
             style={{
               border:
                 item.level == 1
-                  ? "3px solid rgb(14,141,204)"
+                  ? "2px solid rgb(14,141,204)"
                   : item.level == 2
-                  ? "3px solid black"
+                  ? "2px solid black"
                   : item.level == 3
-                  ? "3px solid red"
+                  ? "2px solid red"
                   : item.level == 4
-                  ? "3px solid orange"
-                  : "3px solid rgb(12,176,26)",
+                  ? "2px solid orange"
+                  : "2px solid rgb(12,176,26)",
               backgroundColor: item.selected
                 ? item.plan == "Full Payment Upfront"
                   ? item.level == 1
