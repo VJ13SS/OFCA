@@ -1,8 +1,9 @@
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import "./About.css";
 import { details_one, details_two } from "./AboutDetails";
+import { useState } from "react";
 
 export default function About() {
-
   const cards = details_one.map((item, index) => {
     return (
       <div className="card" key={index}>
@@ -13,9 +14,22 @@ export default function About() {
       </div>
     );
   });
-  
-//https://lyon.training/online-fitness-coach-academy/
-  const rectangles = details_two.map((item, index) => {
+
+  const [reactangleContent, setReactangleContent] = useState(details_two);
+  const displayRectangleContent = (contentId) => {
+    setReactangleContent((prev) =>
+      prev.map((item) =>
+        item.id == contentId
+          ? { ...item, displayContent: !item.displayContent }
+          : { ...item, displayContent: false }
+      )
+    );
+  };
+
+  //to trigger the display of about section 4 content
+  const [displayCreateDetails, setDisplayCreateDetails] = useState(false);
+  //https://lyon.training/online-fitness-coach-academy/
+  const rectangles = reactangleContent.map((item, index) => {
     return (
       <div
         className="rectangle"
@@ -28,11 +42,36 @@ export default function About() {
               ? "white"
               : "rgb(255,20,20)",
           color: index == 0 ? "white" : index == 1 ? "black" : "white",
+          height: item.displayContent ? "fit-content" : "30px",
         }}
       >
         <div className="reactangle-content">
-          <h1>{item.heading}</h1>
-          <p>{item.content}</p>
+          <h1 style={{ fontSize: item.displayContent ? "20px" : "12px" }}>
+            {item.heading}
+          </h1>
+          {!item.displayContent ?
+          <FaChevronDown
+            style={{
+              position: "absolute",
+              top: "15px",
+              right: "10px",
+              cursor: "pointer",
+            }}
+            size={23}
+            onClick={() => displayRectangleContent(item.id)}
+          />:
+          <FaChevronUp
+            style={{
+              position: "absolute",
+              top: "15px",
+              right: "10px",
+              cursor: "pointer",
+            }}
+            size={23}
+            onClick={() => displayRectangleContent(item.id)}
+          />
+  }
+          {item.displayContent && <p>{item.content}</p>}
         </div>
       </div>
     );
@@ -64,10 +103,22 @@ export default function About() {
         <div className="about-rectangles">{rectangles}</div>
       </div>
       <div className="about-section-4">
-        <span>
-          What Went Into Creating The Online Fitness Coach Academy?
-        </span>
-        <p>
+        <span>What Went Into Creating The Online Fitness Coach Academy?</span>
+        {displayCreateDetails ? (
+          <FaChevronUp
+            size={23}
+            style={{ cursor: "pointer" ,marginBottom:'7px'}}
+            onClick={() => setDisplayCreateDetails((prev) => !prev)}
+          />
+        ) : (
+          <FaChevronDown
+            size={23}
+            style={{ cursor: "pointer" }}
+            onClick={() => setDisplayCreateDetails((prev) => !prev)}
+          />
+        )}
+
+        <p style={{ display: displayCreateDetails ? "block" : "none" }}>
           The Online Fitness Coach Academy is an officially registered
           trademark, and the content covered across the five levels of the
           Academy spans 1000s of studies across the scientific literature,

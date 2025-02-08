@@ -4,7 +4,6 @@
   align-items: center;
   height: 60px;
   width: 100%;
-  border: 1px solid black;
   padding-inline: 10px;
   background-color: white;
   scroll-behavior: smooth;
@@ -25,22 +24,7 @@
   object-fit: cover;
 }
 
-.nav-center {
-  width: auto;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  padding: 5px;
-  cursor: pointer;
-  color: black;
-  font-size: 20px;
-}
 
-.nav-center h2 {
-  font-weight: bold;
-}
 
 .nav-right {
   font-size: 20px;
@@ -163,9 +147,11 @@
 }
 
 @media (max-width: 768px) {
-  .nav-center {
-    display: none;
+
+  .nav-left img {
+    height: 40px;
   }
+  
   .navbar .nav-links {
     width: 100%;
     left: 0;

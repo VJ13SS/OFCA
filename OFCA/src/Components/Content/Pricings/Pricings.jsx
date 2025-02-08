@@ -104,11 +104,11 @@ export default function Pricings({itemsPurchased, cartItems }) {
           <span>Level {item.level}</span>
         </span>
         <h3>ONLINE FITNESS COACHING ACADEMY CERTIFICATION</h3>
-        <p>{item.description}</p>
 
         <h1>
           $250<span>/mo</span>
         </h1>
+        <p>{item.description}</p>
         <span>Prices are marked in USD</span>
         <span>Choose your Plan</span>
         <div className="pricing-selections">

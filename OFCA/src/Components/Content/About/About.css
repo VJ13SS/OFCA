@@ -49,7 +49,7 @@
     margin-top: 15px;
     z-index: 5;
     color:black;
-    font-weight: 500;
+    font-weight: bold;
     line-height: 30px;
     max-width: 90%;
 }
@@ -130,7 +130,7 @@
     margin-top: 20px;
     max-width: 90%;
     max-height: fit-content;
-    line-height: 20px;
+    line-height: 18px;
 }
 
 .about-section-3{
@@ -151,19 +151,21 @@
 
 .about-rectangles .rectangle{
     width:90%;
-    height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: left;
     box-shadow: -5px 0 10px rgba(0,0,0,0.3), 5px 0 10px rgba(0,0,0,0.3);
     padding: 30px;
+    position: relative;
+    transition: all 0.3s linear;
+    border-radius: 5px;
 }
 
 .rectangle p{
     max-width: 90%;
     margin-top: 10px;
-    line-height: 25px;
+    line-height: 23px;
 }
 
 .about-section-4{
@@ -176,7 +178,7 @@
 }
 .about-section-4 p{
     max-width: 90%;
-    line-height: 25px;
+    line-height: 23px;
     text-align: left;
 }
 
@@ -240,6 +242,7 @@
         height: fit-content;
         padding: 10px;
     }
+
     .card .card-content{
         font-size: 12px;
     }

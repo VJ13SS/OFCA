@@ -21,15 +21,21 @@ export const details_one = [
 //Rectangles data
 export const details_two = [
     {
+        id:1,
         heading:'Scaling Your Impact',
+        displayContent:false,
         content:"The knowledge you’ll gain throughout the Academy will allow you to take your own fitness/nutrition/training to the next level. The information is presented in a way that is immediately implementable, allowing you to make actionable changes to progress further in your own fitness journey.If you’re interested in coaching others, because the certification is for online coaching specifically, this pursuit will enable you to scale your impact beyond the clients you could potentially meet with in-person. As you go through the Online Fitness Coach Academy coursework, you’ll amass a repository of videos, knowledge, and written takeaways that you can share with clients to help them through their own journeys with you as their coach. Even the most dedicated in-person personal trainer can only train 40-60 clients, and they’re trading time for money. As an online coach, you have the ability to reach and impact 100s, if not 1000s, of clients."
     },
     {
+        id:2,
         heading:'What Happens After I’ve Finished The Academy?',
+        displayContent:false,
         content:"Once you’ve finished the 3-month certification program and received at least 70% on all three assessments, you’ll be an OFCA certified online coach, meaning you’ll be a certified OFCA Level 1 Online Fitness Coach. So in your Instagram bio, resume, website, marketing posts, etc. you can write “Your Name, OFCA”. But far more powerful than the credential is the knowledge you’ll have at your disposal. This knowledge has allowed me to create six separate customizable program offerings for my clients, which has allowed me to work with over 500 clients across a diverse age and gender demographic, in 15 countries on 6 continents. If that sounds like something you’re interested in, then the Online Fitness Coach Academy is for you."
     },
     {
+        id:3,
         heading:'What If I Want To Take My Knowledge Beyond Level 1?',
+        displayContent:false,
         content:"After you’ve completed Level 1 and have received your official OFCA certification, you may advance to Level 2 of the Online Fitness Coach Academy. Level 2 is structured in the same way as Level 1 but will expand your base of knowledge even further than Level 1 learnings. Upon completion of the Online Fitness Coach Academy: Level 2, you’ll be an OFCA2 certified online coach. There are five levels of the Academy, with the OFCA5 being the most advanced and comprehensive. Each level of the Academy directly feeds off the knowledge gained in the previous levels.You may sign up for as many levels of the Academy as you’re ready to commit to in advance, but you can only begin Level 2 after completing Level 1. I highly recommend signing up for as many levels as you’re able to as a commitment to your own personal development, as a commitment to your business, and as a commitment to the success of your clients."
     }
 ]
