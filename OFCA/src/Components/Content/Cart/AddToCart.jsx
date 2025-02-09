@@ -29,6 +29,15 @@ export default function AddToCart({ setCartItems,itemsPurchased,cartItems }) {
     );
   };
 
+  //Date
+  const today = new Date();
+  today.setMonth(today.getMonth() + 1)
+ 
+  //to show the renewal dates and the time period for each plan
+  const getDates = (period) =>{
+    return today.toISOString().split('T')[0]
+  }
+  
   //Each choice is provied a respective color for identification
   const userChoices = userPrograms.map((item, index) => {
     return (
@@ -96,6 +105,7 @@ export default function AddToCart({ setCartItems,itemsPurchased,cartItems }) {
               </div>
             </div>
           </div>
+          {item.plan == "3 Monthly Payments" &&<span>{`Next Renewal ${getDates(1)}`}</span>}
         </div>
       </div>
     );

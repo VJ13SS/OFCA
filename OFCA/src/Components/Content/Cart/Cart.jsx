@@ -44,27 +44,49 @@ export default function Cart({
     localStorage.setItem("cartItems", JSON.stringify(newCartItems));
   };
 
+  //Date
+  const today = new Date();
+  today.setMonth(today.getMonth() + 1)
+ 
+  //to show the renewal dates and the time period for each plan
+  const getDates = (period) =>{
+    return today.toISOString().split('T')[0]
+  }
+
   //Cart Items
   const items = cartItems.map((item, index) => {
     return (
-      <div className="cart-item" key={index}>
+      <div className="cart-item" key={index} >
         <div className="item-icon">
           <img src="./Images/OFCA_ICON.png" alt="" />
         </div>
         <div className="cart-item-details">
-          <span>Level {item.level}</span>
+          <span style={{
+            fontWeight:'bold',
+        color:
+          item.level == 1
+            ?  "rgb(14,141,204)"
+            : item.level == 2
+            ? "black"
+            : item.level == 3
+            ? "red"
+            : item.level == 4
+            ? "orange"
+            : "rgb(12,176,26)",
+            textDecoration:'underline'
+      }}>Level {item.level}</span>
           <span>
             {item.plan == "3 Monthly Payments"
               ? "OFCA Certification Program 3 Months"
               : "OFCA Certification Program Full Certification"}
           </span>
           <span>
-            Price : <span style={{ color: "green" }}>{item.amount}</span>
+            Price : <span style={{ color: "green" }}>{item.plan == "3 Monthly Payments" ?'$250/month':'$700'}</span>
           </span>
           <span>
             Total Price :{" "}
             <span style={{ color: "green" }}>
-              {item.amount * item.quantity}
+            {item.plan == "3 Monthly Payments" ?'$250/month':item.amount * item.quantity}
             </span>
           </span>
           <div className="cart-item-quantity">
@@ -80,6 +102,9 @@ export default function Cart({
               +
             </button>
           </div>
+          <span>Period: {`${item.quantity} * 3 = ${item.quantity * 3} Months`}</span>
+          {item.plan == "3 Monthly Payments" &&<span>{`Next Renewal ${getDates(1)}`}</span>}
+        
         </div>
         <FaTrash
           onClick={() => deleteItem(item.level, item.plan)}

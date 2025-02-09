@@ -34,7 +34,9 @@ export default function App() {
   const discount =
     selectedLevels.size <= 1 ? 0 : 400 / 2 ** (5 - selectedLevels.size); // 2 levels $50 3 levels $100 4 levels $200 5 levels $400 discount
   const totalPrice = cartItems.reduce(
-    (sum, item) => sum + item.amount * item.quantity,
+    (sum, item) => item.plan == "3 Monthly Payments"
+      ? sum + item.amount
+      : sum + item.amount * item.quantity,
     0
   );
 

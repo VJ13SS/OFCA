@@ -99,8 +99,8 @@ export default function PurchaseItems({
   }, [totalPrice, discount]);
 
   //to get the purchased date of the program
+  const today = new Date();
   const purchasedDate = () => {
-    const today = new Date();
     const formattedDate = today.toISOString().split("T")[0];
     return formattedDate
   };
@@ -203,7 +203,7 @@ export default function PurchaseItems({
       {displayTimer && <div className="timer"></div>}
 
       <h1>CHECKOUT</h1>
-      <span>{process.env.REACT_APP_SECRET_KEY}</span>
+      
       <form>
         <h2>Billing Details</h2>
 

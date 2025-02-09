@@ -106,9 +106,9 @@ export default function Pricings({itemsPurchased, cartItems }) {
         <h3>ONLINE FITNESS COACHING ACADEMY CERTIFICATION</h3>
 
         <h1>
-          $250<span>/mo</span>
+          $250<span>/mo FOR THREE MONTHS</span>
         </h1>
-        <p>{item.description}</p>
+        <p>OR $700 One Time Fee</p>
         <span>Prices are marked in USD</span>
         <span>Choose your Plan</span>
         <div className="pricing-selections">

@@ -49,28 +49,29 @@ export default function About() {
           <h1 style={{ fontSize: item.displayContent ? "20px" : "12px" }}>
             {item.heading}
           </h1>
-          {!item.displayContent ?
-          <FaChevronDown
-            style={{
-              position: "absolute",
-              top: "15px",
-              right: "10px",
-              cursor: "pointer",
-            }}
-            size={23}
-            onClick={() => displayRectangleContent(item.id)}
-          />:
-          <FaChevronUp
-            style={{
-              position: "absolute",
-              top: "15px",
-              right: "10px",
-              cursor: "pointer",
-            }}
-            size={23}
-            onClick={() => displayRectangleContent(item.id)}
-          />
-  }
+          {!item.displayContent ? (
+            <FaChevronDown
+              style={{
+                position: "absolute",
+                top: "15px",
+                right: "10px",
+                cursor: "pointer",
+              }}
+              size={23}
+              onClick={() => displayRectangleContent(item.id)}
+            />
+          ) : (
+            <FaChevronUp
+              style={{
+                position: "absolute",
+                top: "15px",
+                right: "10px",
+                cursor: "pointer",
+              }}
+              size={23}
+              onClick={() => displayRectangleContent(item.id)}
+            />
+          )}
           {item.displayContent && <p>{item.content}</p>}
         </div>
       </div>
@@ -104,19 +105,20 @@ export default function About() {
       </div>
       <div className="about-section-4">
         <span>What Went Into Creating The Online Fitness Coach Academy?</span>
-        {displayCreateDetails ? (
-          <FaChevronUp
-            size={23}
-            style={{ cursor: "pointer" ,marginBottom:'7px'}}
-            onClick={() => setDisplayCreateDetails((prev) => !prev)}
-          />
-        ) : (
-          <FaChevronDown
-            size={23}
-            style={{ cursor: "pointer" }}
-            onClick={() => setDisplayCreateDetails((prev) => !prev)}
-          />
-        )}
+
+        <span
+          style={{
+            fontSize: "17px",
+            display: "flex",
+            justifyContent: "center",
+            gap: "10px",
+          }}
+          onClick={() => setDisplayCreateDetails((prev) => !prev)}
+        >
+          {displayCreateDetails
+            ? `Close Me `
+            : `Click Me`}
+        </span>
 
         <p style={{ display: displayCreateDetails ? "block" : "none" }}>
           The Online Fitness Coach Academy is an officially registered

@@ -15,12 +15,25 @@ export default function Navbar({ cartItems }) {
  /// cartItems.sort((item1, item2) => item1.level - item2.level);
   const navCartItems = cartItems.map((item, index) => {
     return (
-      <div className="item" key={index}>
+      <div className="item" key={index} >
         <div className="item-image">
           <img src="./Images/OFCA_LOGO.png" />
         </div>
         <div className="item-details">
-          <h3>Level {item.level}</h3>
+          <h3  style={{
+            fontWeight:'bold',
+        color:
+          item.level == 1
+            ?  "rgb(14,141,204)"
+            : item.level == 2
+            ? "black"
+            : item.level == 3
+            ? "red"
+            : item.level == 4
+            ? "orange"
+            : "rgb(12,176,26)",
+            textDecoration:'underline'
+      }}>Level {item.level}</h3>
           <h2>
             {item.plan == "3 Monthly Payments"
               ? "OFCA Certification Program 3 Months"
@@ -29,10 +42,11 @@ export default function Navbar({ cartItems }) {
           <h3>
             Price :{" "}
             <span style={{ color: "green" }}>
-              {item.amount * item.quantity}
+              {item.plan == "3 Monthly Payments"?'$250 /month':'$700'}
             </span>
           </h3>
           <h3>Quantity: {item.quantity}</h3>
+          <h3>Time Period: {`${item.quantity} * 3 = ${item.quantity * 3} Months`}</h3>
         </div>
       </div>
     );
