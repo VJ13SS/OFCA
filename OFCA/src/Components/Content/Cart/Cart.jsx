@@ -102,7 +102,7 @@ export default function Cart({
               +
             </button>
           </div>
-          <span>Period: {`${item.quantity} * 3 = ${item.quantity * 3} Months`}</span>
+          {item.plan == "3 Monthly Payments" ?<span>3 Monthly Payments</span>:<span>Full Payment Upfront</span>}
           {item.plan == "3 Monthly Payments" &&<span>{`Next Renewal ${getDates(1)}`}</span>}
         
         </div>

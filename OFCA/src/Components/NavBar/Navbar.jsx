@@ -46,7 +46,7 @@ export default function Navbar({ cartItems }) {
             </span>
           </h3>
           <h3>Quantity: {item.quantity}</h3>
-          <h3>Time Period: {`${item.quantity} * 3 = ${item.quantity * 3} Months`}</h3>
+          {item.plan == "3 Monthly Payments" ?<h3>3 Monthly Payments</h3>:<h3>Full Payment Upfront</h3>}
         </div>
       </div>
     );

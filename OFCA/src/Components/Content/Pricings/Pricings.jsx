@@ -91,14 +91,15 @@ export default function Pricings({itemsPurchased, cartItems }) {
           style={{
             border:
               item.level == 1
-                ? "2px solid rgb(14,141,204)"
+                ? "2.5px solid rgb(14,141,204)"
                 : item.level == 2
-                ? "2px solid black"
+                ? "2.5px solid black"
                 : item.level == 3
-                ? "2px solid red"
+                ? "2.5px solid red"
                 : item.level == 4
-                ? "2px solid orange"
-                : "2px solid rgb(12,176,26)",
+                ? "2.5px solid orange"
+                : "2.5px solid rgb(12,176,26)",
+                borderRadius:'3px'
           }}
         >
           <span>Level {item.level}</span>
