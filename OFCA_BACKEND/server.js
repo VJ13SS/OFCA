@@ -21,7 +21,20 @@ app.get('/home', (req,res) => {
 })
 
 app.post('/payment', async (req,res) => {
-    const {product, token} = req.body
+    const {products, token} = req.body;
+    let total_price = 0
+    let subscribed_plans = []
+
+    for(let product of products){
+        if(product.plan == 'Full Payment Upfront'){
+            total_price = total_price + (product.amount * product.quantity) 
+        }
+        else{
+            total_price = total_price + product.amount
+            subscribed_plans.push({level:product.level,plan:product.plan,quantity:product.quantity,amount:product.amount})
+        }
+    }
+
     const idempotencyKey = uuid();
     //create a customer
     try{
@@ -32,7 +45,7 @@ app.post('/payment', async (req,res) => {
     
         //create a charge
         const charge = await stripe.charges.create({
-            amount:product.price * 100,
+            amount:total_price * 100,
             currency:'usd',
             customer:customer.id,
             receipt_email:token.email,
@@ -41,13 +54,38 @@ app.post('/payment', async (req,res) => {
 
         if(charge.status == 'succeeded'){
             //payment succeeded
-            res.status(200).json({success:true,charge})
+            console.log('Payment Succeeded')
+            //res.status(200).json({success:true,charge})
         }else{
             //payment failed or require further action
             res.status(400).json({
                 success:false,
                 error:'Payment was not successfull'
             })
+        }
+
+        for(const plan of subscribed_plans){
+            const totalMonths = plan.quantity * 3;
+            const idempotencyKeySchedule = uuid();
+            const startDate = Math.floor(Date.now()/1000) + 30 * 24 * 60 * 60;
+
+            const subscriptionSchedule = await stripe.subscriptionSchedules.create({
+                customer:customer.id,
+                start_date:startDate,
+                end_behaviour:'cancel',
+                subscription_data:{
+                    collection_method:'send_invoice',
+                    days_until_due:30
+                },
+                phases:[{
+                    items:[{
+                        price:plan.amount,
+                        quantity:plan.quantity
+                    }],
+                    iterations:totalMonths - 1
+                }]
+            },{idempotencyKey:idempotencyKeySchedule})
+
         }
     }catch(error){
         //handle errors
@@ -56,7 +94,6 @@ app.post('/payment', async (req,res) => {
             error:error.message})
     }
     
-
 })
 
 app.listen(PORT,() => {
