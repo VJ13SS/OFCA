@@ -15,7 +15,7 @@ export default function PurchaseItems({
 }) {
   const navigate = useNavigate();
   const [displayTimer, setDisplayTimer] = useState(false);
-  
+
   cartItems.sort((item1, item2) => item1.level - item2.level);
   const returnCart = () => {
     setDisplayTimer(true);
@@ -42,7 +42,7 @@ export default function PurchaseItems({
     State_or_County: "",
     Town_or_City: "",
     HouseNumber_and_StreetName: "",
-    Apartment_or_Suite_or_Unit:"None",
+    Apartment_or_Suite_or_Unit: "None",
     PostCode_or_PinCode_or_ZipCode: "",
     Phone: "",
     EmailAddress: "",
@@ -102,7 +102,7 @@ export default function PurchaseItems({
   const today = new Date();
   const purchasedDate = () => {
     const formattedDate = today.toISOString().split("T")[0];
-    return formattedDate
+    return formattedDate;
   };
 
   //Updating the purchase history
@@ -110,72 +110,74 @@ export default function PurchaseItems({
     let updatedItems = [...items];
 
     choices.forEach((element) => {
-      const index = updatedItems.findIndex(item => item.level == element.level && item.plan == element.plan)
+      const index = updatedItems.findIndex(
+        (item) => item.level == element.level && item.plan == element.plan
+      );
 
-      if(index != -1){
-        updatedItems[index] = {...updatedItems[index],purchasedOn:purchasedDate(), quantity: element.quantity}
+      if (index != -1) {
+        updatedItems[index] = {
+          ...updatedItems[index],
+          purchasedOn: purchasedDate(),
+          quantity: element.quantity,
+        };
+      } else {
+        updatedItems.unshift({ ...element, purchasedOn: purchasedDate() });
       }
-      else{
-        updatedItems.unshift({ ...element,purchasedOn:purchasedDate() });
-      }
-      
     });
 
     return updatedItems;
   };
 
-  
   //Purchase Confirmation
   const completePurchase = () => {
-    let purchased =
-          JSON.parse(localStorage.getItem("purchaseHistory")) || [];
-        const updatedItemsPurchased = updatePurchaseHistory(
-          purchased,
-          cartItems
-        );
+    let purchased = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
+    const updatedItemsPurchased = updatePurchaseHistory(purchased, cartItems);
 
-        setItemsPurchased(updatedItemsPurchased);
-        //setItemsPurchased((prev) => ({...prev,purchasedOn:purchasedDate()}))
-        
-        localStorage.setItem("purchaseHistory", JSON.stringify(updatedItemsPurchased));
+    setItemsPurchased(updatedItemsPurchased);
+    //setItemsPurchased((prev) => ({...prev,purchasedOn:purchasedDate()}))
 
-        //update the cart
-        setCartItems([]);
-        localStorage.setItem("cartItems", JSON.stringify([]));
-        
-        //alert("Purchase Completed");
-        navigate('/')
-        
-  }
+    localStorage.setItem(
+      "purchaseHistory",
+      JSON.stringify(updatedItemsPurchased)
+    );
+
+    //update the cart
+    setCartItems([]);
+    localStorage.setItem("cartItems", JSON.stringify([]));
+
+    //alert("Purchase Completed");
+    navigate("/");
+  };
 
   //Function to link the email js email service
   const sendEmail = () => {
-    
     setForm({ ...form, products_table: generateProductsTable() });
-    for(let key in form){
-      if(form[key] == ''){
-        alert(`Missing Field ${key}`)
-        return
-      }
-    }
-    emailjs.send('service_44nolmr', 'template_ud3pu5m', form, '7xzu1_S-S0TbFD6yt').then(
-      (response) => {
-        alert('Purchase Completed')
-        completePurchase()
-      },
-      (error) => {
-        alert("Error", error);
-        
-      }
-    );
+
+    emailjs
+      .send("service_44nolmr", "template_ud3pu5m", form, "7xzu1_S-S0TbFD6yt")
+      .then(
+        (response) => {
+          alert("Purchase Completed");
+          completePurchase();
+        },
+        (error) => {
+          alert("Error", error);
+        }
+      );
   };
 
   //Connecting the stripe API
   const makePayment = async (token) => {
+    for (let key in form) {
+      if (form[key] == "") {
+        alert(`Missing Field ${key}`);
+        return;
+      }
+    }
     const body = {
       token,
       cartItems,
-    }; 
+    };
     const headers = {
       "Content-Type": "application/json",
     };
@@ -189,7 +191,7 @@ export default function PurchaseItems({
 
     if (data.success) {
       alert("Payment successfull");
-      sendEmail()
+      sendEmail();
     } else {
       alert("Payment Failed");
     }
@@ -203,7 +205,7 @@ export default function PurchaseItems({
       {displayTimer && <div className="timer"></div>}
 
       <h1>CHECKOUT</h1>
-      
+
       <form>
         <h2>Billing Details</h2>
 
@@ -374,15 +376,15 @@ export default function PurchaseItems({
         </div>
       </form>
 
-      {cartItems.length > 0 && (
+      {(cartItems.length > 0 && !Object.values(form).some(val => val === '')) ? (
         <StripeCheckout
-          stripeKey="Key="
+          stripeKey="pk_test"
           token={makePayment}
           name="Purchase Items"
         >
           <button className="purchase">Pay</button>
         </StripeCheckout>
-      )}
+      ):<span>Fill the billing details</span>}
     </div>
   );
 }
