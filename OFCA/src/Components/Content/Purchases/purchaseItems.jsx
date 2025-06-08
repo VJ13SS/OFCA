@@ -198,8 +198,7 @@ export default function PurchaseItems({
   };
   return (
     <div className="purchase-items">
-      {/*<button onClick={sendEmail}>Send</button>*/}
-      <button className="back-button" onClick={returnCart}>
+       <button className="back-button" onClick={returnCart}>
         Back
       </button>
       {displayTimer && <div className="timer"></div>}
